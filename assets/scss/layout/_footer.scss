@@ -1,0 +1,95 @@
+// 輸入框的大小設定問題
+.input1 {
+  max-width: 520px;
+  width: 520px;
+}
+
+// 目前環境變數不包含的padding大小
+.pb-16 {
+  padding-bottom: 218px;
+}
+
+// 圖片與icon大小
+.ban {
+  width: 74px;
+  height: 74px;
+}
+.pic1 {
+  width: 233px;
+}
+.pic-icon {
+  width: 3rem;
+  height: 3rem;
+}
+
+// 兩個區塊間的border線
+.section-f2 {
+  .border-line {
+    border-right: solid #7f7973 1px;
+  }
+}
+
+.navItem {
+  opacity: 1;
+  transition: 0.5s;
+}
+.navItem:hover {
+  opacity: 0.6;
+}
+
+// 因為跑版所以自行新增的RWD大小
+@media (max-width: 1400px) {
+  .input1 {
+    width: 400px;
+  }
+}
+
+// 同上
+@media (max-width: 1200px) {
+  .input1 {
+    width: 320px;
+  }
+}
+
+@media (max-width: 992px) {
+  .ban {
+    width: 16px;
+    height: 16px;
+  }
+
+  .section-f2 {
+    .border-line {
+      border-right: #7f7973;
+      border-bottom: solid #7f7973 1px;
+    }
+  }
+
+  .pic-icon {
+    width: 2rem;
+    height: 2rem;
+  }
+
+  .pb-16 {
+    padding-bottom: 48px;
+  }
+  .content1 {
+    align-items: center;
+  }
+
+  .content2 {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 768px) {
+  .pic1 {
+    width: 74px;
+  }
+  .pic-icon {
+    width: 1rem;
+    height: 1rem;
+  }
+  .pb-16 {
+    padding-bottom: 24px;
+  }
+}

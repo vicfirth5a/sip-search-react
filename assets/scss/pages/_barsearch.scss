@@ -1,0 +1,537 @@
+// *,
+// *::after,
+// *::before {
+//   outline: 1px solid white;
+// }
+
+// 定義變數
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+
+@mixin respond-to($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+// banner區塊
+.section-bar-search-banner {
+  // border: 1px solid red;
+  padding: 284px 0 100px;
+  background-size: cover;
+  background-position: center;
+
+  @include respond-to($medium) {
+    padding: 160px 0 76px;
+  }
+
+  .container {
+    padding: 24px 0;
+
+    @include respond-to($medium) {
+      padding: 0;
+    }
+
+    .main-content {
+
+      // display: flex;
+      // justify-content: center;
+      .input-group {
+        max-width: 730px;
+
+        @include respond-to($medium) {
+          max-width: 200px;
+        }
+
+        .form-control {
+          background: transparent;
+        }
+
+        .form-control:focus,
+        .form-control:focus+.input-group-text {
+          border-color: $primary-3;
+          // box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* 藍色陰影效果 */
+          box-shadow: none;
+        }
+      }
+
+      .search-input {
+        border-right: none;
+
+        &::placeholder {
+          color: $primary-1;
+          font-size: 24px;
+
+          @include respond-to($medium) {
+            font-size: 12px;
+          }
+        }
+      }
+
+      .input-group-text {
+        color: $primary-1;
+        font-size: 36px;
+        background-color: transparent;
+        border-left: none;
+        cursor: pointer;
+      }
+    }
+
+    .modal {
+      .modal-dialog {
+        max-width: 576px;
+      }
+
+      .modal-body {
+        background-color: $neutral-5;
+        padding: 24px 40px;
+        max-width: 596px;
+
+        .area {
+          background-color: $primary-2;
+          padding: 6px 18px;
+          font-size: 24px;
+        }
+
+        .city-list,
+        .other-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px;
+
+          .city-item,
+          .other-item {
+            display: block;
+            padding: 8px 24px;
+            font-size: 20px;
+            background-color: transparent;
+            border: 1px solid $primary-1;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: 0.4s;
+
+            &:hover {
+              background-color: $primary-1;
+              color: $neutral-5;
+              border: 1px solid $neutral-5;
+            }
+
+            &.selected {
+              background-color: $primary-3;
+              color: $primary-1;
+              border: 1px solid $primary-3;
+            }
+          }
+        }
+      }
+    }
+
+    #selected-tags {
+      max-width: 730px;
+      min-height: 50px;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+
+      .selected-tag {
+        display: flex;
+        align-items: center;
+
+        padding: 8px 24px;
+        font-size: 20px;
+        border-radius: 100px;
+        cursor: pointer;
+        background-color: $primary-1;
+        color: $neutral-5;
+        border: 1px solid $neutral-5;
+
+        .material-symbols-outlined {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .selected-tags {
+      .selected-tag {
+        display: block;
+        padding: 8px 24px;
+        font-size: 20px;
+        border-radius: 100px;
+        cursor: pointer;
+        background-color: $primary-1;
+        color: $neutral-5;
+        border: 1px solid $neutral-5;
+      }
+    }
+  }
+
+  h1 {
+    margin: 24px 0;
+
+    @include respond-to($large) {
+      margin-top: 0;
+    }
+  }
+}
+
+// 熱門酒吧top6
+.sectionPopularBars {
+  // border: 1px solid #a00;
+  padding: 120px 0;
+  color: $primary-1;
+
+  @include respond-to($medium) {
+    padding: 40px 0;
+  }
+
+  .swiper {
+
+    // width: 100%;
+    .swiper-wrapper {
+      .swiper-slide {
+        // border: 1px solid red;
+        // margin: auto;
+        // text-align: start;
+        padding-top: 40px;
+
+        @include respond-to($medium) {
+          padding-top: 0;
+        }
+
+        .popularBarsItem {
+          background-position: center;
+          background-size: cover;
+          padding: 72px 40px 52px;
+          max-width: 437px;
+          margin: auto;
+          // min-height: 692px;
+          aspect-ratio: 437 / 692;
+
+          @include respond-to($medium) {
+            max-width: 230px;
+            // min-height: 325px;
+            padding: 28px 24px 24px;
+          }
+
+          cursor: pointer;
+          transition: transform 0.3s;
+
+          &:hover {
+            transform: translateY(-40px);
+
+            .barIntro {
+              display: block !important;
+              opacity: 1;
+            }
+          }
+
+          .title {
+            h4 {
+              color: $neutral-white;
+            }
+
+            .material-symbols-outlined {
+              cursor: pointer;
+              transition: 1s;
+
+              &:hover {
+                font-variation-settings: "FILL" 1;
+              }
+            }
+          }
+
+          .barIntro {
+            opacity: 0;
+            transition: 0.7s;
+
+            @include respond-to($medium) {
+              opacity: 1;
+            }
+          }
+        }
+
+        // &:nth-child(odd) {
+        //   .popularBarsItem {
+        //     margin-right: -10px;
+        //     @media (max-width: 1250px) {
+        //       margin-right: 0;
+        //     }
+        //   }
+        // }
+
+        // &:nth-child(even) {
+        //   .popularBarsItem {
+        //     margin-left: -100px;
+        //     @media (max-width: 1250px) {
+        //       margin-left: 0;
+        //     }
+        //   }
+        // }
+      }
+    }
+
+    .swiper-button-next:after,
+    .swiper-button-prev:after {
+      display: none;
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      width: auto;
+      height: auto;
+
+      @include respond-to($medium) {
+        display: none;
+      }
+    }
+
+    .swiperButton {
+      width: 80px;
+      height: 80px;
+      background-color: $primary-4;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      transition: 0.4s;
+
+      &:hover {
+        background-color: $primary-1;
+        filter: brightness(0.8);
+
+        .material-symbols-outlined {
+          color: $primary-4;
+        }
+      }
+
+      .material-symbols-outlined {
+        color: $primary-1;
+        font-size: 40px;
+      }
+    }
+  }
+}
+
+// 獨特酒吧
+.section-unique-bars {
+  padding: 120px 0;
+
+  @include respond-to($medium) {
+    padding: 40px 0;
+  }
+
+  .unique-bar-list {
+    display: flex;
+    justify-content: space-between;
+    // gap: 48px;
+
+    @include respond-to($large) {
+      //   gap: 24px;
+      flex-wrap: nowrap;
+      overflow-x: auto;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+
+    .unique-bar-item {
+      padding: 48px 24px;
+      flex-grow: 1;
+
+      .pic {
+        position: relative;
+
+        img {
+          border-radius: 1000px 1000px 0 0;
+          object-fit: cover;
+          object-position: center;
+        }
+
+        &::before {
+          content: "";
+          position: absolute;
+          top: -3px;
+          bottom: -3px;
+          left: -3px;
+          right: -3px;
+          z-index: -1;
+          background: linear-gradient(#ffc93d, #b5650e);
+          border-radius: 1000px 1000px 0 0;
+          //   overflow: hidden;
+        }
+      }
+
+      .txt {
+        .more {
+          opacity: 1;
+          transition: 0.5s;
+
+          &:hover {
+            opacity: 0.6;
+          }
+        }
+
+        .more span {
+          cursor: pointer;
+        }
+      }
+
+      @include respond-to($large) {
+        padding: 24px 12px;
+        max-width: 252px;
+        flex-shrink: 0;
+        // scroll-snap-align: center;
+      }
+    }
+  }
+
+  .tag {
+    background-color: $primary-3;
+    padding: 12px 24px;
+    border-radius: 100px;
+    font-size: 24px;
+
+    @include respond-to($medium) {
+      padding: 4px 8px;
+      font-size: 10px;
+    }
+  }
+
+  .btn-more {
+    a {
+      color: $primary-1;
+      border: 1px solid $primary-1;
+      background-color: transparent;
+      transition: 0.5s;
+
+      &:hover {
+        color: $primary-4;
+        background-color: $primary-1;
+      }
+    }
+  }
+}
+
+// 周圍最新活動
+
+.nearby-event {
+  .eng-font {
+    line-height: 1.5;
+  }
+
+  .swiper-wrapper .swiper-slide {
+    margin: 0 auto;
+    width: auto;
+
+  }
+
+  .nearby-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: hidden;
+
+    & img {
+      position: absolute;
+      width: 437px;
+      height: 924px;
+      object-fit: cover;
+      filter: brightness(50%);
+    }
+
+    .card-body {
+      width: 437px;
+      height: 924px;
+      position: relative;
+
+      &:hover {
+        cursor: pointer;
+      }
+
+      .event-date {
+        display: flex;
+        justify-content: space-between;
+        width: 159px;
+      }
+
+      .event-more {
+        &:hover {
+          filter: brightness(50%);
+          transition: 0.4s;
+        }
+      }
+    }
+  }
+
+  .swiper-button-next:after,
+  .swiper-button-prev:after {
+    display: none;
+  }
+
+  .swiper-button-next,
+  .swiper-button-prev {
+    width: auto;
+    height: auto;
+  }
+
+  .swiper-button-next {
+    top: 50%;
+    /* 垂直置中 */
+    transform: translateY(-50%);
+  }
+
+  .swiper-button-prev {
+    top: 50%;
+    /* 垂直置中 */
+    transform: translateY(-50%);
+  }
+
+  .swiperButton {
+    width: 80px;
+    height: 80px;
+    background-color: $primary-1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: 0.4s;
+
+    &:hover {
+      filter: brightness(0.8);
+    }
+
+    .material-symbols-outlined {
+      color: $primary-4;
+      font-size: 40px;
+    }
+  }
+}
+
+@media (max-width: 992px) {
+  .nearby-event {
+    background-color: none;
+
+    .nearby-card {
+      & img {
+        width: 241px;
+        height: 454px;
+      }
+
+      .card-body {
+        width: 241px;
+        height: 454px;
+
+        .event-date {
+          width: 85px;
+        }
+      }
+    }
+
+    .swiper-button-next,
+    .swiper-button-prev {
+      display: none;
+    }
+  }
+}

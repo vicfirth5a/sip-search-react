@@ -1,0 +1,70 @@
+.about-content {
+  //   max-width: 1011px;
+  padding-top: 170px;
+  padding-bottom: 64px;
+  margin-right: 120px;
+}
+
+.aboutContent {
+  // background-color: #8e44ad;
+  color: $primary-1;
+  // font-family: "Roboto Mono", sans-serif;
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  // height: 100vh;
+  overflow: hidden;
+}
+
+.counter-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  text-align: center;
+  margin: 30px 50px;
+}
+
+.counter {
+  font-size: 60px;
+  margin-top: 10px;
+}
+
+@media (max-width: 992px) {
+  .about-content {
+    //   max-width: 1011px;
+    padding-top: 170px;
+    padding-bottom: 32px;
+    margin-right: 120px;
+  }
+  .aboutContent {
+    flex-direction: row; /* 保持水平方向 */
+    flex-wrap: wrap; /* 允許換行 */
+    justify-content: center;
+    max-width: 800px; /* 限制最大寬度 */
+    margin: 0 auto; /* 水平置中 */
+  }
+
+  .counter-container {
+    flex-direction: column; /* 保持水平方向 */
+    flex-wrap: wrap;
+    width: calc(50% - 50px);
+    justify-content: center;
+    align-items: center;
+    margin: 15px 25px;
+  }
+
+  .counter {
+    font-size: 40px; /* 縮小字體大小 */
+  }
+}
+
+@media (max-width: 580px) {
+  body {
+    flex-direction: column;
+  }
+  .counter-container {
+    width: 100%;
+    margin: 10px 20px;
+  }
+}
