@@ -167,3 +167,21 @@ $x-large: 1200px;
     }
   }
 }
+
+.section-bar-search-filter {
+  .btn-outline-primary-3:hover {
+    color: #ecdec3;
+  }
+
+  .scrollBar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .border-lg {
+    border: 1px solid #b5650e;
+    border-radius: 50rem;
+    @include respond-to($large) {
+      border: none;
+    }
+  }
+}
