@@ -1,0 +1,169 @@
+// 定義變數
+$medium: 768px;
+$large: 992px;
+$x-large: 1200px;
+
+@mixin respond-to($size) {
+  @media (max-width: $size) {
+    @content;
+  }
+}
+
+// banner區塊
+.section-bar-search-banner {
+  // border: 1px solid red;
+  padding: 284px 0 100px;
+  background-size: cover;
+  background-position: center;
+
+  @include respond-to($medium) {
+    padding: 160px 0 76px;
+  }
+
+  .container {
+    padding: 24px 0;
+
+    @include respond-to($medium) {
+      padding: 0;
+    }
+
+    .main-content {
+      // display: flex;
+      // justify-content: center;
+      .input-group {
+        max-width: 382px;
+
+        @include respond-to($medium) {
+          max-width: 200px;
+        }
+
+        .form-control {
+          background: transparent;
+        }
+
+        .form-control:focus,
+        .form-control:focus + .input-group-text {
+          border-color: $primary-3;
+          // box-shadow: 0 0 0 0.25rem rgba(13, 110, 253, 0.25); /* 藍色陰影效果 */
+          box-shadow: none;
+        }
+      }
+
+      .search-input {
+        border-right: none;
+
+        &::placeholder {
+          color: $primary-1;
+          font-size: 24px;
+
+          @include respond-to($medium) {
+            font-size: 12px;
+          }
+        }
+      }
+
+      .input-group-text {
+        color: $primary-1;
+        font-size: 36px;
+        background-color: transparent;
+        border-left: none;
+        cursor: pointer;
+      }
+    }
+
+    .modal {
+      .modal-dialog {
+        max-width: 576px;
+      }
+
+      .modal-body {
+        background-color: $neutral-5;
+        padding: 24px 40px;
+        max-width: 596px;
+
+        .area {
+          background-color: $primary-2;
+          padding: 6px 18px;
+          font-size: 24px;
+        }
+
+        .city-list,
+        .other-list {
+          display: flex;
+          flex-wrap: wrap;
+          gap: 16px;
+
+          .city-item,
+          .other-item {
+            display: block;
+            padding: 8px 24px;
+            font-size: 20px;
+            background-color: transparent;
+            border: 1px solid $primary-1;
+            border-radius: 100px;
+            cursor: pointer;
+            transition: 0.4s;
+
+            &:hover {
+              background-color: $primary-1;
+              color: $neutral-5;
+              border: 1px solid $neutral-5;
+            }
+
+            &.selected {
+              background-color: $primary-3;
+              color: $primary-1;
+              border: 1px solid $primary-3;
+            }
+          }
+        }
+      }
+    }
+
+    #selected-tags {
+      max-width: 730px;
+      min-height: 50px;
+      display: flex;
+      gap: 4px;
+      flex-wrap: wrap;
+
+      .selected-tag {
+        display: flex;
+        align-items: center;
+
+        padding: 8px 24px;
+        font-size: 20px;
+        border-radius: 100px;
+        cursor: pointer;
+        background-color: $primary-1;
+        color: $neutral-5;
+        border: 1px solid $neutral-5;
+
+        .material-symbols-outlined {
+          font-size: 20px;
+        }
+      }
+    }
+
+    .selected-tags {
+      .selected-tag {
+        display: block;
+        padding: 8px 24px;
+        font-size: 20px;
+        border-radius: 100px;
+        cursor: pointer;
+        background-color: $primary-1;
+        color: $neutral-5;
+        border: 1px solid $neutral-5;
+      }
+    }
+  }
+
+  h1 {
+    margin: 24px 0;
+
+    @include respond-to($large) {
+      margin-top: 0;
+    }
+  }
+}
