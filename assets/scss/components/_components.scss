@@ -81,6 +81,22 @@
   }
 }
 
+.card-btn-primary-1 {
+  color: $primary-4;
+  background-color: $primary-1;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: $primary-1;
+    color: $primary-3;
+  }
+
+  &:active {
+    background-color: $primary-3;
+    color: $primary-1;
+  }
+}
+
 .cardBtn-primary-4 {
   color: #fbfbfb;
   background-color: $primary-4;
