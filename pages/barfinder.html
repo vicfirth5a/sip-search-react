@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>barfinder</title>
+  </head>
+  <body>
+    <%- include('./layout/header'); -%>
+    <!-- 第一區塊 -->
+    <section
+      class="section section-bar-search-banner text-center text-primary-1"
+      style="
+        background-image: linear-gradient(
+            rgba(0, 0, 0, 0.5),
+            rgba(0, 0, 0, 0.6)
+          ),
+          url(../assets/images/barsearch/bar-search-banner.png);
+      "
+    >
+      <div class="container">
+        <div class="main-title mb-6 mb-md-11">
+          <h1 class="fs-7 fs-md-5">尋找你周圍最棒的酒吧</h1>
+        </div>
+        <div class="main-content text-primary-1">
+          <div class="input-group mx-auto mb-5">
+            <input
+              type="text"
+              class="form-control p-2 p-md-6 search-input"
+              placeholder="立即搜尋"
+              aria-label="Search"
+              data-bs-toggle="modal"
+              data-bs-target="#exampleModal"
+            />
+            <span
+              class="input-group-text material-symbols-outlined fs-8 fs-md-5"
+            >
+              search
+            </span>
+          </div>
+          <div id="selected-tags" class="d-flex flex-wrap mx-auto"></div>
+        </div>
+
+        <!-- Modal -->
+        <div
+          class="modal fade"
+          id="exampleModal"
+          tabindex="-1"
+          aria-labelledby="exampleModalLabel"
+          aria-hidden="true"
+        >
+          <div class="modal-dialog">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">
+                  你想找哪兒的酒吧
+                </h5>
+                <button
+                  type="button"
+                  class="btn-close"
+                  data-bs-dismiss="modal"
+                  aria-label="Close"
+                ></button>
+              </div>
+              <div class="modal-body text-primary-1">
+                <div class="region mb-6">
+                  <div class="area text-start mb-5">北部</div>
+                  <div class="city-list">
+                    <span class="city-item">台北市</span>
+                    <span class="city-item">新北市</span>
+                    <span class="city-item">基隆市</span>
+                    <span class="city-item">桃園市</span>
+                    <span class="city-item">新竹市</span>
+                    <span class="city-item">新竹縣</span>
+                  </div>
+                </div>
+                <div class="region mb-6">
+                  <div class="area text-start mb-5">中南部</div>
+                  <div class="city-list">
+                    <span class="city-item">台中市</span>
+                    <span class="city-item">苗栗縣</span>
+                    <span class="city-item">彰化縣</span>
+                    <span class="city-item">南投縣</span>
+                    <span class="city-item">雲林縣</span>
+                    <span class="city-item">台南市</span>
+                    <span class="city-item">高雄市</span>
+                    <span class="city-item">嘉義市</span>
+                    <span class="city-item">屏東縣</span>
+                  </div>
+                </div>
+                <div class="region mb-6">
+                  <div class="area text-start mb-5">東部</div>
+                  <div class="city-list">
+                    <span class="city-item">宜蘭縣</span>
+                    <span class="city-item">花蓮縣</span>
+                    <span class="city-item">台東縣</span>
+                  </div>
+                </div>
+                <div class="region mb-6">
+                  <div class="area text-start mb-5">其他</div>
+                  <div class="other-list">
+                    <span class="other-item">可訂位</span>
+                    <span class="other-item">2~3人</span>
+                    <span class="other-item">4~6人</span>
+                    <span class="other-item">6人以上</span>
+                    <span class="other-item">有包廂</span>
+                    <span class="other-item">停車場</span>
+                    <span class="other-item">可刷卡</span>
+                    <span class="other-item">不限時</span>
+                  </div>
+                </div>
+              </div>
+              <div class="modal-footer">
+                <button
+                  type="button"
+                  class="btn btn-outline-light fs-7 rounded-pill"
+                  data-bs-dismiss="modal"
+                >
+                  關閉
+                </button>
+                <button
+                  type="submit"
+                  class="btn btn-outline-light fs-7 rounded-pill"
+                  data-bs-dismiss="modal"
+                  id="addTagsBtn"
+                >
+                  儲存變更
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <%- include('./layout/footer'); -%>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+      crossorigin="anonymous"
+    ></script>
+    <script type="module" src="../main.js"></script>
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.7.1/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
+    <script>
+      AOS.init();
+    </script>
+  </body>
+</html>
