@@ -53,6 +53,28 @@ $(document).ready(function() {
 
 });
 
+// document.addEventListener('DOMContentLoaded', function () {
+//   const scrollLeftBtn1 = document.getElementById('scroll-left-btn-1');
+//   const scrollRightBtn1 = document.getElementById('scroll-right-btn-1');
+//   const scrollContainer1 = document.getElementById('scroll-container-1');
+
+//   if (scrollLeftBtn1 && scrollRightBtn1 && scrollContainer1) {
+//     scrollLeftBtn1.addEventListener('click', function () {
+//       scrollContainer1.scrollBy({
+//         left: -200,
+//         behavior: 'smooth'
+//       });
+//     });
+
+//     scrollRightBtn1.addEventListener('click', function () {
+//       scrollContainer1.scrollBy({
+//         left: 200,
+//         behavior: 'smooth'
+//       });
+//     });
+//   }
+// });
+
 
 
 
