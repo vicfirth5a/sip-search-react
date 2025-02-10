@@ -187,8 +187,6 @@ $x-large: 1200px;
 }
 
 .bar-card {
-  // width: 376px;
-  // height: 400px;
   & img {
     position: absolute;
     width: 376px;
@@ -220,6 +218,12 @@ $x-large: 1200px;
   }
 }
 
+.material-symbols-outlined:hover,
+.material-symbols-outlined:active {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+  transition: 0.5s;
+  cursor: pointer;
+}
 // @media (max-width: 1150px) {
 //   .bar-card {
 //     & img {
