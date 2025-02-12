@@ -1,5 +1,5 @@
 // 定義變數
-$medium: 768px;
+$large: 768px;
 $large: 992px;
 $x-large: 1200px;
 
@@ -166,4 +166,74 @@ $x-large: 1200px;
       margin-top: 0;
     }
   }
+}
+
+.section-bar-search-filter {
+  .btn-outline-primary-3:hover {
+    color: #ecdec3;
+  }
+
+  .scrollBar::-webkit-scrollbar {
+    display: none;
+  }
+
+  .border-lg {
+    border: 1px solid #b5650e;
+    border-radius: 50rem;
+    @include respond-to($large) {
+      border: none;
+    }
+  }
+}
+
+.bar-card {
+  & img {
+    position: absolute;
+    width: 376px;
+    height: 400px;
+    object-fit: cover;
+    @include respond-to($x-large) {
+      width: 300px;
+      height: 300px;
+    }
+    @include respond-to($medium) {
+      width: 169px;
+      height: 280px;
+    }
+  }
+  .card-body {
+    position: relative;
+    width: 376px;
+    height: 400px;
+    @include respond-to($x-large) {
+      position: relative;
+      width: 300px;
+      height: 300px;
+    }
+    @include respond-to($medium) {
+      position: relative;
+      width: 169px;
+      height: 280px;
+    }
+  }
+}
+
+.section-bar-search-result {
+  .btn-size {
+    width: 48px;
+    height: 48px;
+  }
+  .custom-padding {
+    margin-right: -12px;
+    @include respond-to($large) {
+      margin-right: 0;
+    }
+  }
+}
+
+.material-symbols-outlined:hover,
+.material-symbols-outlined:active {
+  font-variation-settings: "FILL" 1, "wght" 400, "GRAD" 0, "opsz" 24;
+  transition: 0.5s;
+  cursor: pointer;
 }

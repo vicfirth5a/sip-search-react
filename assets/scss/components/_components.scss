@@ -64,11 +64,26 @@
   }
 }
 
-
 .wineBtn-outline {
   color: $primary-3;
   background-color: transparent;
   border: 1px solid $primary-3;
+  transition: 0.5s;
+
+  &:hover {
+    background-color: $primary-1;
+    color: $primary-3;
+  }
+
+  &:active {
+    background-color: $primary-3;
+    color: $primary-1;
+  }
+}
+
+.card-btn-primary-1 {
+  color: $primary-4;
+  background-color: $primary-1;
   transition: 0.5s;
 
   &:hover {
@@ -221,7 +236,7 @@ $line-thickness: 1px;
 }
 
 .wineBtn {
-  min-width: 92px;
+  min-width: 33px;
   white-space: nowrap;
 }
 
@@ -241,8 +256,8 @@ $line-thickness: 1px;
 }
 
 .pageBtn {
-  // height: 44px;
-  width: 48px;
+  height: 32px;
+  width: 32px;
   min-width: 0px;
 }
 
@@ -330,7 +345,8 @@ $line-thickness: 1px;
 }
 
 //響應式
-@media (max-width: 992px) {}
+@media (max-width: 992px) {
+}
 
 @media (max-width: 768px) {
   .wineBtn {
@@ -368,11 +384,10 @@ $line-thickness: 1px;
 }
 
 @media (max-width: 768px) {
-
   .sectionPopularBars .tag,
   .section-unique-bars .tag,
   .section-barContent .tag,
-.section-similar-bars .tag {
+  .section-similar-bars .tag {
     padding: 4px 8px;
     font-size: 16px;
   }
