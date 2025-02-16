@@ -1,5 +1,8 @@
+import IndexPage from "./pages/IndexPage";
+import React from "react";
+
 function App() {
-    return <h1>Hello, React in Vite!</h1>;
+    return <IndexPage/>
   }
   
   export default App;
