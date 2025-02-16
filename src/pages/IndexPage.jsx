@@ -21,7 +21,7 @@ function IndexPage() {
               </div>
               <img
                 className="modalImg mt-lg-9 mb-lg-12 mb-3"
-                src="/assets/images/image-sip&search chi.png"
+                src="/sip-search-react/assets/images/image-sip&search chi.png"
                 alt="sip&search"
               />
               <div className="text-center mb-lg-13 mb-3">
@@ -678,7 +678,7 @@ function IndexPage() {
               <div className="img-ctrl">
                 <img
                   className="discover-img"
-                  src="../assets/images/webinfo-1.jpg"
+                  src="/sip-search-react/assets/images/webinfo-1.jpg"
                   alt="cocktail"
                 />
               </div>
@@ -733,7 +733,7 @@ function IndexPage() {
               <div className="img-ctrl">
                 <img
                   className="discover-img"
-                  src="../assets/images/webinfo-2.jpg"
+                  src="/sip-search-react/assets/images/webinfo-2.jpg"
                   alt="cocktail"
                 />
               </div>
@@ -819,7 +819,7 @@ function IndexPage() {
                       </div>
                       <div className="pic position-relative">
                         <img
-                          src="../assets/images/index_wine/wine01.png"
+                          src="/sip-search-react/assets/images/index_wine/wine01.png"
                           alt="wine"
                         />
                         <div className="arrow position-absolute bottom-0 end-0">
@@ -867,7 +867,7 @@ function IndexPage() {
                       </div>
                       <div className="pic w-lg-50 position-relative">
                         <img
-                          src="../assets/images/index_wine/wine02.png"
+                          src="/sip-search-react/assets/images/index_wine/wine02.png"
                           alt="wine"
                         />
                         <div className="arrow position-absolute bottom-0 end-0">
@@ -915,7 +915,7 @@ function IndexPage() {
                       </div>
                       <div className="pic w-lg-50 position-relative">
                         <img
-                          src="../assets/images/index_wine/wine03.png"
+                          src="/sip-search-react/assets/images/index_wine/wine03.png"
                           alt="wine"
                         />
                         <div className="arrow position-absolute bottom-0 end-0">
@@ -963,7 +963,7 @@ function IndexPage() {
                       </div>
                       <div className="pic w-lg-50 position-relative">
                         <img
-                          src="../assets/images/index_wine/wine04.png"
+                          src="/sip-search-react/assets/images/index_wine/wine04.png"
                           alt="wine"
                         />
                         <div className="arrow position-absolute bottom-0 end-0">
@@ -1011,7 +1011,7 @@ function IndexPage() {
                       </div>
                       <div className="pic w-lg-50 position-relative">
                         <img
-                          src="../assets/images/index_wine/wine05.png"
+                          src="/sip-search-react/assets/images/index_wine/wine05.png"
                           alt="wine"
                         />
                         <div className="arrow position-absolute bottom-0 end-0">
@@ -1059,7 +1059,7 @@ function IndexPage() {
                       </div>
                       <div className="pic w-lg-50 position-relative">
                         <img
-                          src="../assets/images/index_wine/wine06.png"
+                          src="/sip-search-react/assets/images/index_wine/wine06.png"
                           alt="wine"
                         />
                         <div className="arrow position-absolute bottom-0 end-0">
@@ -1120,7 +1120,7 @@ function IndexPage() {
                   {/* Slides  */}
                   <div className="swiper-slide position-relative">
                     <img
-                      src="../assets/images/index_bar/bar01.png"
+                      src="/sip-search-react/assets/images/index_bar/bar01.png"
                       alt="bar"
                       className="bar-pic"
                     />
@@ -1159,7 +1159,7 @@ function IndexPage() {
                   </div>
                   <div className="swiper-slide position-relative">
                     <img
-                      src="../assets/images/index_bar/bar02.jpg"
+                      src="/sip-search-react/assets/images/index_bar/bar02.jpg"
                       alt="bar"
                       className="bar-pic"
                     />
@@ -1198,7 +1198,7 @@ function IndexPage() {
                   </div>
                   <div className="swiper-slide position-relative">
                     <img
-                      src="../assets/images/index_bar/bar03.jpg"
+                      src="/sip-search-react/assets/images/index_bar/bar03.jpg"
                       alt="bar"
                       className="bar-pic"
                     />
@@ -1237,7 +1237,7 @@ function IndexPage() {
                   </div>
                   <div className="swiper-slide position-relative">
                     <img
-                      src="../assets/images/index_bar/bar04.jpg"
+                      src="/sip-search-react/assets/images/index_bar/bar04.jpg"
                       alt="bar"
                       className="bar-pic"
                     />
@@ -1276,7 +1276,7 @@ function IndexPage() {
                   </div>
                   <div className="swiper-slide position-relative">
                     <img
-                      src="../assets/images/index_bar/bar05.jpg"
+                      src="/sip-search-react/assets/images/index_bar/bar05.jpg"
                       alt="bar"
                       className="bar-pic"
                     />
@@ -1465,7 +1465,7 @@ function IndexPage() {
           <ul className="comments-list bg-primary-1 d-flex">
             <li className="comments-list-item" data-aos="zoom-in-right">
               <div className="comments-list-item-title d-flex mb-8">
-                <img src="../assets/images/Ellipse 6.png" alt="user-1" />
+                <img src="/sip-search-react/assets/images/Ellipse 6.png" alt="user-1" />
                 <div className="comments-list-item-name ms-5">
                   <h3 className="eng-font fs-7 fs-md-5 text-primary-3 mb-2">
                     eilloee
@@ -1503,7 +1503,7 @@ function IndexPage() {
               data-aos-delay="300"
             >
               <div className="comments-list-item-title d-flex mb-8">
-                <img src="../assets/images/Ellipse 2.png" alt="user-2" />
+                <img src="/sip-search-react/assets/images/Ellipse 2.png" alt="user-2" />
                 <div className="comments-list-item-name ms-5">
                   <h3 className="eng-font fs-7 fs-md-5 text-primary-3 mb-2">
                     Mindy Lo
@@ -1535,7 +1535,7 @@ function IndexPage() {
 
             <li className="comments-list-item" data-aos="zoom-in-right">
               <div className="comments-list-item-title d-flex mb-8">
-                <img src="../assets/images/Ellipse 7.png" alt="user-3" />
+                <img src="/sip-search-react/assets/images/Ellipse 7.png" alt="user-3" />
                 <div className="comments-list-item-name ms-5">
                   <h3 className="eng-font fs-7 fs-md-5 text-primary-3 mb-2">
                     bboyhaha
@@ -1571,7 +1571,7 @@ function IndexPage() {
               data-aos-delay="300"
             >
               <div className="comments-list-item-title d-flex mb-8">
-                <img src="../assets/images/Ellipse 5.png" alt="user-4" />
+                <img src="/sip-search-react/assets/images/Ellipse 5.png" alt="user-4" />
                 <div className="comments-list-item-name ms-5">
                   <h3 className="eng-font fs-7 fs-md-5 text-primary-3 mb-2">
                     xxxcindysss
