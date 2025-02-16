@@ -1,6 +1,5 @@
 import React from "react";
 
-
 function IndexPage() {
   return (
     <>
@@ -8,7 +7,7 @@ function IndexPage() {
       <div
         className="modal fade"
         id="ageVerificationModal"
-        tabindex="-1"
+        tabIndex="-1"
         aria-labelledby="ageVerificationModalLabel"
         aria-hidden="true"
         data-bs-backdrop="static"
@@ -89,7 +88,7 @@ function IndexPage() {
                 id="staticBackdrop"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-labelledby="staticBackdropLabel"
                 aria-hidden="true"
               >
@@ -372,7 +371,7 @@ function IndexPage() {
                 id="staticBackdrop-2"
                 data-bs-backdrop="static"
                 data-bs-keyboard="false"
-                tabindex="-1"
+                tabIndex="-1"
                 aria-labelledby="staticBackdropLabel"
                 aria-hidden="true"
               >
@@ -593,12 +592,12 @@ function IndexPage() {
                 </div>
               </div>
               <div className="input-group boder-primary-1 d-flex">
-                <label htmlFor="search" className="htmlForm-label d-none">
+                <label htmlFor="search" className="htmlform-label d-none">
                   搜尋
                 </label>
                 <input
                   type="text"
-                  className="htmlForm-control fs-lg-6 fs-md-8 fs-9"
+                  className="htmlform-control fs-lg-6 fs-md-8 fs-9"
                   id="search"
                   placeholder="立即搜尋"
                   aria-label="立即搜尋"
@@ -762,7 +761,7 @@ function IndexPage() {
               <input
                 type="text"
                 placeholder="請輸入您的 Email"
-                className="htmlForm-control text-primary-1 eng-font mt-2"
+                className="htmlform-control text-primary-1 eng-font mt-2"
               />
             </div>
             <a
