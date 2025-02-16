@@ -651,7 +651,7 @@ function IndexPage() {
                 </label>
                 <input
                   type="text"
-                  className="htmlform-control fs-lg-6 fs-md-8 fs-9"
+                  className="form-control fs-lg-6 fs-md-8 fs-9"
                   id="search"
                   placeholder="立即搜尋"
                   aria-label="立即搜尋"
@@ -751,7 +751,7 @@ function IndexPage() {
                   >
                     我想找酒譜
                     <span className="material-symbols-outlined ms-3">
-                      arrow_htmlForward_ios
+                      arrow_forward_ios
                     </span>
                   </a>
                 </div>
@@ -779,7 +779,7 @@ function IndexPage() {
                   >
                     我想找酒吧
                     <span className="material-symbols-outlined ms-3">
-                      arrow_htmlForward_ios
+                      arrow_forward_ios
                     </span>
                   </a>
                 </div>
@@ -815,7 +815,7 @@ function IndexPage() {
               <input
                 type="text"
                 placeholder="請輸入您的 Email"
-                className="htmlform-control text-primary-1 eng-font mt-2"
+                className="form-control text-primary-1 eng-font mt-2"
               />
             </div>
             <a
@@ -882,7 +882,7 @@ function IndexPage() {
                             className="d-flex align-items-center justify-content-center text-white rounded-circle"
                           >
                             <span className="material-symbols-outlined d-block">
-                              arrow_htmlForward
+                              arrow_forward
                             </span>
                           </a>
                         </div>
@@ -930,7 +930,7 @@ function IndexPage() {
                             className="d-flex align-items-center justify-content-center text-white rounded-circle"
                           >
                             <span className="material-symbols-outlined d-block fs-lg-4">
-                              arrow_htmlForward
+                              arrow_forward
                             </span>
                           </a>
                         </div>
@@ -978,7 +978,7 @@ function IndexPage() {
                             className="d-flex align-items-center justify-content-center text-white rounded-circle"
                           >
                             <span className="material-symbols-outlined d-block fs-lg-4">
-                              arrow_htmlForward
+                              arrow_forward
                             </span>
                           </a>
                         </div>
@@ -1026,7 +1026,7 @@ function IndexPage() {
                             className="d-flex align-items-center justify-content-center text-white rounded-circle"
                           >
                             <span className="material-symbols-outlined d-block fs-lg-4">
-                              arrow_htmlForward
+                              arrow_forward
                             </span>
                           </a>
                         </div>
@@ -1074,7 +1074,7 @@ function IndexPage() {
                             className="d-flex align-items-center justify-content-center text-white rounded-circle"
                           >
                             <span className="material-symbols-outlined d-block fs-lg-4">
-                              arrow_htmlForward
+                              arrow_forward
                             </span>
                           </a>
                         </div>
@@ -1122,7 +1122,7 @@ function IndexPage() {
                             className="d-flex align-items-center justify-content-center text-white rounded-circle"
                           >
                             <span className="material-symbols-outlined d-block fs-lg-4">
-                              arrow_htmlForward
+                              arrow_forward
                             </span>
                           </a>
                         </div>
@@ -1159,7 +1159,7 @@ function IndexPage() {
             <div className="d-flex justify-content-center">
               <a href="#" className="swiper-button-next swiper-button">
                 <span className="material-symbols-outlined d-block fs-7 fs-lg-4">
-                  arrow_htmlForward
+                  arrow_forward
                 </span>
               </a>
             </div>
@@ -1428,7 +1428,7 @@ function IndexPage() {
                         四月餐酒館
                       </p>
                       <span className="material-symbols-outlined">
-                        arrow_htmlForward_ios
+                        arrow_forward_ios
                       </span>
                     </div>
                   </a>
@@ -1447,7 +1447,7 @@ function IndexPage() {
                         台北＿<span className="eng-font">Mono Mono</span>
                       </p>
                       <span className="material-symbols-outlined">
-                        arrow_htmlForward_ios
+                        arrow_forward_ios
                       </span>
                     </div>
                   </a>
@@ -1464,7 +1464,7 @@ function IndexPage() {
                     <div className="list-card-name mt-1 d-flex justify-content-between align-items-center text-neutral-1">
                       <p className="fs-8 fs-md-5">新竹＿隱士餐酒館</p>
                       <span className="material-symbols-outlined">
-                        arrow_htmlForward_ios
+                        arrow_forward_ios
                       </span>
                     </div>
                   </a>
@@ -1484,7 +1484,7 @@ function IndexPage() {
                         <span className="eng-font">P.S. I LOVE YOU BAR</span>
                       </p>
                       <span className="material-symbols-outlined">
-                        arrow_htmlForward_ios
+                        arrow_forward_ios
                       </span>
                     </div>
                   </a>
@@ -1495,7 +1495,7 @@ function IndexPage() {
                 <div className="event-btn d-flex justify-content-end align-items-center">
                   <p className="fs-8 fs-md-5 me-6">查看更多</p>
                   <span className="material-symbols-outlined">
-                    arrow_htmlForward_ios
+                    arrow_forward_ios
                   </span>
                 </div>
               </a>
@@ -1543,7 +1543,7 @@ function IndexPage() {
               >
                 <p className="fs-9 fs-lg-6">查看更多</p>
                 <span className="material-symbols-outlined ms-3 fs-9 fs-lg-6">
-                  arrow_htmlForward_ios
+                  arrow_forward_ios
                 </span>
               </a>
             </li>
@@ -1579,7 +1579,7 @@ function IndexPage() {
               >
                 <p className="fs-9 fs-lg-6">查看更多</p>
                 <span className="material-symbols-outlined ms-3 fs-9 fs-lg-6">
-                  arrow_htmlForward_ios
+                  arrow_forward_ios
                 </span>
               </a>
             </li>
@@ -1611,7 +1611,7 @@ function IndexPage() {
               >
                 <p className="fs-9 fs-lg-6">查看更多</p>
                 <span className="material-symbols-outlined ms-3 fs-9 fs-lg-6">
-                  arrow_htmlForward_ios
+                  arrow_forward_ios
                 </span>
               </a>
             </li>
@@ -1648,7 +1648,7 @@ function IndexPage() {
               >
                 <p className="fs-9 fs-lg-6">查看更多</p>
                 <span className="material-symbols-outlined ms-3 fs-9 fs-lg-6">
-                  arrow_htmlForward_ios
+                  arrow_forward_ios
                 </span>
               </a>
             </li>
