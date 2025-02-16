@@ -1,6 +1,60 @@
-import React from "react";
+import React, { useEffect } from 'react';
+import Swiper from 'swiper/bundle';
+import 'swiper/css/bundle';
 
 function IndexPage() {
+
+  useEffect(() => {
+    // 初始化首頁熱門酒譜swiper
+    new Swiper('.swiper-popular-recipe', {
+      direction: 'horizontal',
+      slidesPerView: 'auto',
+      speed: 1200,
+      slidesOffsetBefore: 50,
+      spaceBetween: 20,
+      breakpoints: {
+        320: {
+          slidesOffsetBefore: 50,
+        },
+        576: {
+          slidesOffsetBefore: 100,
+        },
+        768: {
+          slidesOffsetBefore: 200,
+          spaceBetween: 20,
+        },
+        1280: {
+          slidesOffsetBefore: 300,
+          spaceBetween: 72,
+        },
+      },
+      mousewheel: true,
+      mousewheel: {
+        releaseOnEdges: true,
+      },
+      pagination: {
+        el: '.swiper-pagination',
+        clickable: true,
+      },
+    });
+
+    // 初始化首頁熱門酒吧swiper
+    new Swiper('.swiper-popular-bars', {
+      loop: true,
+      speed: 2000,
+      effect: 'fade',
+      fadeEffect: {
+        crossFade: true,
+      },
+      navigation: {
+        nextEl: '.swiper-button-next',
+        prevEl: '.swiper-button-prev',
+      },
+    });
+  }, []);
+
+
+
   return (
     <>
       
