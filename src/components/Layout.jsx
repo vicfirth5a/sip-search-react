@@ -55,7 +55,7 @@ function Layout() {
               <div className="log-custom-border">
                 <Link
                   className="px-lg-5 py-lg-6 text-primary-1 d-block navItem fs-8"
-                  to="/member-login"
+                  to="/memberlogin"
                 >
                   註冊/登入
                   <i className="bi bi-search text-primary-1"></i>
