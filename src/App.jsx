@@ -1,8 +1,8 @@
-import IndexPage from "./pages/IndexPage";
-import React from "react";
+import React from 'react';
+import AppRouter from './routes/AppRouter';
 
 function App() {
-    return <IndexPage/>
-  }
-  
-  export default App;
+  return <AppRouter />;
+}
+
+export default App;
