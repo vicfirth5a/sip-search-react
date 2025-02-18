@@ -1,6 +1,40 @@
-import React from "react";
+import React, { useState, useRef } from "react";
+import axios from "axios";
+import { Modal } from "bootstrap";
+import { useNavigate } from "react-router-dom";
+
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function MemberSignup() {
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [nickname, setNickname] = useState("");
+  const modalRef = useRef(null);
+  const navigate = useNavigate();
+
+
+  const Signup = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await axios.post(`${baseUrl}/users`, {
+        email,
+        password,
+        nickname,
+      });
+      console.log(res.data);
+      const modal = new Modal(modalRef.current);
+      modal.show();
+
+       // 設置定時器，在 5 秒後跳轉到首頁
+       setTimeout(() => {
+        navigate("/");
+      }, 5000);
+    } catch (error) {
+      console.error(error);
+    }
+  };
+
   return (
     <>
       <div className="section-ms-1 mt-13">
@@ -17,7 +51,7 @@ function MemberSignup() {
                   更快速掌握網站的各種功能消息！
                 </p>
 
-                <form className="text-primary-1 mb-lg-12">
+                <form className="text-primary-1 mb-lg-12" onSubmit={Signup}>
                   <div className="mb-3">
                     <label htmlFor="nickname" className="form-label fs-lg-6">
                       綽號
@@ -26,6 +60,8 @@ function MemberSignup() {
                       type="text"
                       className="form-control text-primary-1"
                       id="nickname"
+                      value={nickname}
+                      onChange={(e) => setNickname(e.target.value)}
                       required
                     />
                   </div>
@@ -41,6 +77,8 @@ function MemberSignup() {
                       className="form-control text-primary-1"
                       id="exampleInputEmail1"
                       aria-describedby="emailHelp"
+                      value={email}
+                      onChange={(e) => setEmail(e.target.value)}
                       required
                     />
                   </div>
@@ -56,6 +94,8 @@ function MemberSignup() {
                       id="inputPassword5"
                       className="form-control text-primary-1"
                       aria-describedby="passwordHelpBlock"
+                      value={password}
+                      onChange={(e) => setPassword(e.target.value)}
                       required
                     />
                     <div id="passwordHelpBlock" className="form-text">
@@ -65,55 +105,47 @@ function MemberSignup() {
                     </div>
                   </div>
 
-                  {/* <!-- Button trigger modal --> */}
                   <button
-                    type="button"
+                    type="submit"
                     className="btn btn-index-primary1 px-lg-8 mb-13 mb-lg-0"
-                    data-bs-toggle="modal"
-                    data-bs-target="#exampleModal"
                   >
                     創立一個新帳號
                   </button>
-
-                  {/* <!-- Modal --> */}
-                  <div
-                    className="modal fade"
-                    id="exampleModal"
-                    tabIndex="-1"
-                    aria-labelledby="exampleModalLabel"
-                    aria-hidden="true"
-                  >
-                    <div className="modal-dialog">
-                      <div className="modal-content">
-                        <div className="modal-body modal-border-primary-1">
-                          <div className="decoration">
-                            <div className="wrap-1"></div>
-                          </div>
-                          <div className="d-flex flex-column align-items-center">
-                            <h4 className="text-primary-1 mb-lg-8 mt-lg-13">
-                              會員註冊成功
-                            </h4>
-                            <span className="material-symbols-outlined ml-check">
-                              task_alt
-                            </span>
-                            <div className="d-flex mt-lg-8 mb-lg-13">
-                              <p className="fs-8">正在跳轉至首頁 5...</p>
-                              <span className="material-symbols-outlined">
-                                progress_activity
-                              </span>
-                            </div>
-                          </div>
-                          <div className="decoration">
-                            <div className="wrap-2 ms-auto"></div>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
                 </form>
               </div>
             </div>
             <div className="col-lg-5"></div>
+          </div>
+        </div>
+      </div>
+
+      {/* Modal */}
+      <div
+        className="modal fade"
+        id="exampleModal"
+        tabIndex="-1"
+        aria-labelledby="exampleModalLabel"
+        aria-hidden="true"
+        ref={modalRef}
+      >
+        <div className="modal-dialog">
+          <div className="modal-content">
+            <div className="modal-body modal-border-primary-1">
+              <div className="decoration">
+                <div className="wrap-1"></div>
+              </div>
+              <div className="d-flex flex-column align-items-center">
+                <h4 className="text-primary-1 mb-lg-8 mt-lg-13">會員註冊成功</h4>
+                <span className="material-symbols-outlined ml-check text-primary-1 ">task_alt</span>
+                <div className="d-flex mt-lg-8 mb-lg-13">
+                  <p className="fs-8 text-primary-1 ">正在跳轉至首頁 5...</p>
+                  <span className="material-symbols-outlined text-primary-1 ">progress_activity</span>
+                </div>
+              </div>
+              <div className="decoration">
+                <div className="wrap-2 ms-auto"></div>
+              </div>
+            </div>
           </div>
         </div>
       </div>
