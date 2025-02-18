@@ -1,12 +1,46 @@
-import React, { use } from "react";
+import React, { useEffect,  useState } from "react";
 import { Link } from "react-router";
+import axios from "axios";
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
+
 
 function MemberLogin() {
 
-// const [account, setAccount] = useState({
-//     username: "test@test.com",
-//     password:"example",
-// });
+const [account, setAccount] = useState({
+    email: "",
+    password:"",
+});
+
+const handleInputChange = (e) => {
+  const { value, name } = e.target;
+
+  setAccount({
+    ...account,
+    [name]: value,
+  });
+};
+
+const handleLogin = async (e) => {
+  e.preventDefault();
+  try {
+    const res = await axios.post(`${baseUrl}/login`, account);
+    console.log(res.data);
+    
+  } catch (error) {
+    alert("登入失敗");
+    console.error(error);
+    
+  }
+}
+
+useEffect(() => {
+  const token = document.cookie.replace(
+    /(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/,
+    "$1"
+  );
+  axios.defaults.headers.common["Authorization"] = token;
+}, []);
 
   return (
     <>
@@ -23,7 +57,7 @@ function MemberLogin() {
                   已有帳號，使用註冊信箱登入
                 </h6>
 
-                <form className="text-primary-1 mb-lg-12">
+                <form onSubmit={handleLogin} className="text-primary-1 mb-lg-12">
                   <div className="mb-3">
                     <label
                       htmlFor="exampleInputEmail1"
@@ -35,7 +69,11 @@ function MemberLogin() {
                       type="email"
                       className="form-control text-primary-1"
                       id="exampleInputEmail1"
+                      name="email"
                       aria-describedby="emailHelp"
+                      value={account.email}
+                      onChange={handleInputChange}
+                      required
                     />
                   </div>
                   <div className="mb-3">
@@ -49,6 +87,10 @@ function MemberLogin() {
                       type="password"
                       className="form-control text-primary-1 mb-10"
                       id="exampleInputPassword1"
+                      name="password"
+                      value={account.password}
+                      onChange={handleInputChange}
+                      required
                     />
                   </div>
 

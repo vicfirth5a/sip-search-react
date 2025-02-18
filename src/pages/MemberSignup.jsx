@@ -17,7 +17,7 @@ function MemberSignup() {
   const Signup = async (e) => {
     e.preventDefault();
     try {
-      const res = await axios.post(`${baseUrl}/users`, {
+      const res = await axios.post(`${baseUrl}/signup`, {
         email,
         password,
         nickname,
@@ -29,7 +29,7 @@ function MemberSignup() {
        // 設置定時器，在 5 秒後跳轉到首頁
        setTimeout(() => {
         navigate("/");
-      }, 5000);
+      }, 3000);
     } catch (error) {
       console.error(error);
     }
