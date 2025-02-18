@@ -1,30 +1,53 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
+import axios from "axios";
+
+const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function RecipesSearch() {
-    useEffect(() => {
-        new Swiper(".mySwiper-rs", {
-            slidesPerView: "auto",
-            spaceBetween: 24    ,
-            slidesPerView: 2,
-            slidesPerGroup: 1,
-            pagination: {
-              el: ".swiper-pagination-custom",
-              type: "fraction",
-            },
-            navigation: {
-              nextEl: ".custom-button-next",
-              prevEl: null,
-            },
-            breakpoints: {
-              992: {
-                slidesPerView: 3,
-                spaceBetween: 48,
-              },
-            },
-          });
-      }, []);
+  const [products, setProducts] = useState([]);
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 6;
+
+
+  const getProducts = async (page = 1) => {
+    try {
+      const res = await axios.get(`${baseUrl}/recipes?_page=${page}&_limit=${cardsPerPage}`);
+      console.log("取得產品成功",res.data);
+      setProducts(res.data);
+    } catch (error) {
+      console.error("取得產品失敗", error);
+      alert("取得產品失敗");
+    }
+  };
+
+  useEffect(() => {
+    getProducts();
+  }, []);
+
+  useEffect(() => {
+    new Swiper(".mySwiper-rs", {
+      slidesPerView: "auto",
+      spaceBetween: 24,
+      slidesPerView: 2,
+      slidesPerGroup: 1,
+      pagination: {
+        el: ".swiper-pagination-custom",
+        type: "fraction",
+      },
+      navigation: {
+        nextEl: ".custom-button-next",
+        prevEl: null,
+      },
+      breakpoints: {
+        992: {
+          slidesPerView: 3,
+          spaceBetween: 48,
+        },
+      },
+    });
+  }, []);
 
   return (
     <>
@@ -474,19 +497,19 @@ function RecipesSearch() {
                 </div>
 
                 <div className="col d-flex align-items-center justify-content-end">
-                  <h5 className="text-primary-1 me-lg-6 me-3 ms-10 fs-lg-8 fs-10">
+                  <p className="text-primary-1 me-lg-6 me-3 ms-10 fs-lg-8 fs-10">
                     清除所有條件
-                  </h5>
-                  <h5 className="text-white me-lg-4 d-none d-md-block">
+                  </p>
+                  <p className="text-white me-lg-4 d-none d-md-block">
                     {" "}
                     排序：
-                  </h5>
-                  <h5 className="text-white me-lg-4 me-3 d-none d-md-block">
+                  </p>
+                  <p className="text-white me-lg-4 me-3 d-none d-md-block">
                     <a href="#">熱門程度</a>
-                  </h5>
-                  <h5 className="text-neutral-3 border-0 border-start border-neutral-3 ps-lg-4 d-none d-md-block">
+                  </p>
+                  <p className="text-neutral-3 border-0 border-start border-neutral-3 ps-lg-4 d-none d-md-block">
                     <a href="#">按讚數</a>
-                  </h5>
+                  </p>
                 </div>
                 <div className="custom-list-rs d-md-none d-flex justify-content-end">
                   <div className="dropdown">
@@ -517,113 +540,109 @@ function RecipesSearch() {
           </div>
 
           <div className="row gx-lg-13 gy-lg-13 gy-md-10 gy-0 gx-md-6 mb-lg-13 flex-md-wrap flex-nowrap overflow-x-scroll scrollBar">
-            <div className="col-lg-4 col-md-6 col-9 overflow-hidden">
-              <div data-aos="fade-up" className="card-container">
-                <div className="card position-relative">
-                  <div className="card-content mt-6 mt-md-9 mt-lg-0">
-                    <div className="cross-container">
-                      <div className="cross-1">
-                        <div className="cross-line horizontal"></div>
-                        <div className="cross-line vertical"></div>
-                      </div>
-                      <div className="cross-2">
-                        <div className="cross-line horizontal"></div>
-                        <div className="cross-line vertical"></div>
-                      </div>
-                    </div>
-                    <div className="card-body mt-lg-5 text-center">
-                      <h5 className="card-title text-primary-4 mb-lg-3">
-                        花花公子
-                      </h5>
-
-                      <img
-                        src="/assets/images/image-Boulevardier.png"
-                        className="card-img-bottom cardImg"
-                        alt="image-Boulevardier"
-                      />
-                      <div className="">
-                        <a
-                          href="#"
-                          className="cardBtn btn btn-primary-4 rounded-circle"
-                        >
-                          <span className="material-symbols-outlined align-baseline">
-                            arrow_forward
-                          </span>
-                        </a>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div className="card-hover">
-                  <div className="card-hover-content mt-8">
-                    <div className="cross-container">
-                      <div className="cross-1">
-                        <div className="cross-line horizontal"></div>
-                        <div className="cross-line vertical"></div>
-                      </div>
-                      <div className="cross-2">
-                        <div className="cross-line horizontal"></div>
-                        <div className="cross-line vertical"></div>
-                      </div>
-                    </div>
-
-                    <div className="card-body m-lg-6 m-4">
-                      <h4 className="text-primary-4 fs-lg-4 fs-6 eng-font">
-                        Boulevardier
-                      </h4>
-                      <h6 className="text-primary-4 mt-lg-1 fs-lg-6 fs-8">
-                        花花公子
-                      </h6>
-                      <div className="col my-lg-6 my-3">
-                        <div
-                          className="btn-group"
-                          role="group"
-                          aria-label="Basic outlined example"
-                        >
-                          <button
-                            type="button"
-                            className="btn active btn-outline-primary-3 rounded-pill text-primary-1 fs-10 me-lg-4"
-                          >
-                            琴酒
-                          </button>
-                          <button
-                            type="button"
-                            className="btn active btn-outline-primary-3 rounded-pill text-primary-1 fs-10 me-lg-4"
-                          >
-                            甜苦艾酒
-                          </button>
-                          <button
-                            type="button"
-                            className="btn active btn-outline-primary-3 rounded-pill text-primary-1 fs-10"
-                          >
-                            鳳梨
-                          </button>
+            {products && products.length > 0 ? (
+              products.map((recipes) => (
+                <div
+                  key={recipes.id}
+                  className="col-lg-4 col-md-6 col-9 overflow-hidden"
+                >
+                  <div data-aos="fade-up" className="card-container">
+                    <div className="card position-relative">
+                      <div className="card-content mt-6 mt-md-9 mt-lg-0">
+                        <div className="cross-container">
+                          <div className="cross-1">
+                            <div className="cross-line horizontal"></div>
+                            <div className="cross-line vertical"></div>
+                          </div>
+                          <div className="cross-2">
+                            <div className="cross-line horizontal"></div>
+                            <div className="cross-line vertical"></div>
+                          </div>
+                        </div>
+                        <div className="card-body mt-lg-5 text-center">
+                          <h5 className="card-title text-primary-4 mb-lg-3">
+                            {recipes.title}
+                          </h5>
+                          <img
+                            src={recipes.image}
+                            className="card-img-bottom cardImg"
+                            alt={recipes.title}
+                          />
+                          <div className="">
+                            <a
+                              href="#"
+                              className="cardBtn btn btn-primary-4 rounded-circle"
+                            >
+                              <span className="material-symbols-outlined align-baseline">
+                                arrow_forward
+                              </span>
+                            </a>
+                          </div>
                         </div>
                       </div>
-                      <p className="fs-lg-9 fs-10">
-                        一款風格時尚的雞尾酒，通常以伏特加或龍舌蘭為基底，加入蔓越莓汁、橙酒與檸檬汁調製而成。酸甜清爽的口感，搭配鮮豔的顏色，為派對增添一抹活力和誘惑。
-                      </p>
-                      <div className="">
-                        <img
-                          className="cardImg-hover card-hoverImg mb-lg-3"
-                          src="/assets/images/image-Boulevardier.png"
-                          alt="image-Boulevardier"
-                        />
-                        <a
-                          href="wine-content.html"
-                          className="cardBtn cardBtn-primary-4 rounded-circle eng-font"
-                        >
-                          <span className="material-symbols-outlined align-middle">
-                            arrow_forward
-                          </span>
-                        </a>
+                    </div>
+                    <div className="card-hover">
+                      <div className="card-hover-content mt-8">
+                        <div className="cross-container">
+                          <div className="cross-1">
+                            <div className="cross-line horizontal"></div>
+                            <div className="cross-line vertical"></div>
+                          </div>
+                          <div className="cross-2">
+                            <div className="cross-line horizontal"></div>
+                            <div className="cross-line vertical"></div>
+                          </div>
+                        </div>
+                        <div className="card-body m-lg-6 m-4">
+                          <h4 className="text-primary-4 fs-lg-4 fs-6 eng-font">
+                            {recipes.title_en}
+                          </h4>
+                          <h6 className="text-primary-4 mt-lg-1 fs-lg-6 fs-8">
+                            {recipes.title}
+                          </h6>
+                          <div className="col my-lg-6 my-3">
+                            <div
+                              className="btn-group"
+                              role="group"
+                              aria-label="Basic outlined example"
+                            >
+                              {recipes.tags.map((tag, index) => (
+                                <button
+                                  key={index}
+                                  type="button"
+                                  className="btn active btn-outline-primary-3 rounded-pill text-primary-1 fs-10 me-lg-4"
+                                >
+                                  {tag}
+                                </button>
+                              ))}
+                            </div>
+                          </div>
+                          <p className="fs-lg-9 fs-10">{recipes.content}</p>
+                          <div className="d-flex justify-content-between">
+                            <img
+                              className="cardImg-hover card-hoverImg mb-lg-3"
+                              src={recipes.image}
+                              alt={recipes.title}
+                            />
+                            <a
+                              href="wine-content.html"
+                              className="cardBtn cardBtn-primary-4 rounded-circle eng-font"
+                            >
+                              <span className="material-symbols-outlined align-middle">
+                                arrow_forward
+                              </span>
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
                 </div>
-              </div>
-            </div>
-            <div className="col-lg-4 col-md-6 col-9 overflow-hidden">
+              ))
+            ) : (
+              <p>沒有找到產品</p>
+            )}
+            {/* <div className="col-lg-4 col-md-6 col-9 overflow-hidden">
               <div data-aos="fade-up" className="card-container">
                 <div className="card">
                   <div className="card-content mt-6 mt-md-9 mt-lg-0">
@@ -1152,7 +1171,7 @@ function RecipesSearch() {
                   </div>
                 </div>
               </div>
-            </div>
+            </div> */}
           </div>
           <div className="row mt-11 mt-lg-0">
             <div className="col d-flex justify-content-end">

@@ -1,8 +1,6 @@
 import React, { useEffect } from 'react';
 import Swiper from 'swiper/bundle';
 import 'swiper/css/bundle';
-import { Modal } from 'bootstrap';
-
 
 function IndexPage() {
 
@@ -53,8 +51,6 @@ function IndexPage() {
         prevEl: '.swiper-button-prev',
       },
     });
-
-    
   }, []);
 
 
