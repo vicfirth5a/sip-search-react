@@ -6,6 +6,7 @@ import RecipesSearch from '../pages/RecipesSearch';
 import BarFinder from '../pages/BarFinder';
 import MemberSignup from '../pages/MemberSignup';
 import MemberLogin from '../pages/MemberLogin';
+import WineContent from '../pages/WineContent';
 // 導入其他頁面...
 
 const routesConfig = [
@@ -36,6 +37,10 @@ const routesConfig = [
       {
         path: 'memberlogin',
         element: <MemberLogin />,
+      },
+      {
+        path: 'winecontent',
+        element: <WineContent />,
       },
       
       // 添加其他路由...
