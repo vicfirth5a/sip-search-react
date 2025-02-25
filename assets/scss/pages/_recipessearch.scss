@@ -54,8 +54,11 @@
   }
 
   .card {
-    height: 536px;
+    height: 450px;
     background-color: #ecdec3;
+  }
+  .card-hover {
+    height: 450px;
   }
 
   .scrollBar::-webkit-scrollbar {
@@ -80,7 +83,7 @@
 
 .section-rs3 {
   .rs-content {
-    height: 536px;
+    height: 527px;
   }
 
   .likes,

@@ -23,9 +23,9 @@ function RecipesSearch() {
     }
   };
 
-  // useEffect(() => {
-  //   getProducts();
-  // }, []);
+  useEffect(() => {
+    getProducts();
+  }, []);
 
   useEffect(() => {
     new Swiper(".mySwiper-rs", {
@@ -109,7 +109,7 @@ function RecipesSearch() {
           </div>
         </div>
       </div>
-      <div className="section-rs2 pb-lg-15 pb-10">
+      <div className="section-rs2  pb-10">
         {/* <!-- card的gx-13間隔太大(72px)，所以在父層設定overflow-hidden --> */}
 
         <div className="container overflow-x-hidden overflow-y-hidden">
@@ -485,7 +485,7 @@ function RecipesSearch() {
             </div>
           </div>
 
-          <div className="row gx-lg-13 gy-lg-13 gy-md-10 gy-0 gx-md-6 mb-lg-13 flex-md-wrap flex-nowrap overflow-x-scroll scrollBar">
+          <div className="row gx-lg-11 gy-lg-11 gy-md-6 gy-0 gx-md-6 mb-lg-3 mx-lg-12 flex-md-wrap flex-nowrap overflow-x-scroll scrollBar">
             {products && products.length > 0 ? (
               products.map((recipes) => (
                 <div
@@ -505,12 +505,12 @@ function RecipesSearch() {
                             <div className="cross-line vertical"></div>
                           </div>
                         </div>
-                        <div className="card-body mt-lg-5 text-center">
-                          <h5 className="card-title text-primary-4 mb-lg-3">
+                        <div className="card-body text-center">
+                          <h6 className="card-title text-primary-4 mb-lg-3 fw-bold">
                             {recipes.title}
-                          </h5>
+                          </h6>
                           <img
-                            src={recipes.image}
+                            src={recipes.imagesUrl[0]}
                             className="card-img-bottom cardImg"
                             alt={recipes.title}
                           />
@@ -528,7 +528,7 @@ function RecipesSearch() {
                       </div>
                     </div>
                     <div className="card-hover">
-                      <div className="card-hover-content mt-8">
+                      <div className="card-hover-content ">
                         <div className="cross-container">
                           <div className="cross-1">
                             <div className="cross-line horizontal"></div>
@@ -539,14 +539,14 @@ function RecipesSearch() {
                             <div className="cross-line vertical"></div>
                           </div>
                         </div>
-                        <div className="card-body m-lg-6 m-4">
-                          <h4 className="text-primary-4 fs-lg-4 fs-6 eng-font">
+                        <div className="card-body m-lg-6 m-4 pt-lg-3">
+                          <h4 className="text-primary-4 fs-6 eng-font ">
                             {recipes.title_en}
                           </h4>
-                          <h6 className="text-primary-4 mt-lg-1 fs-lg-6 fs-8">
+                          <h6 className="text-primary-4 mt-lg-1 fs-lg-7 fs-8 ">
                             {recipes.title}
                           </h6>
-                          <div className="col my-lg-6 my-3">
+                          <div className="col my-2">
                             <div
                               className="btn-group"
                               role="group"
@@ -567,7 +567,7 @@ function RecipesSearch() {
                           <div className="d-flex justify-content-between">
                             <img
                               className="cardImg-hover card-hoverImg mb-lg-3"
-                              src={recipes.image}
+                              src={recipes.imagesUrl[1]}
                               alt={recipes.title}
                             />
                             <a
@@ -1119,7 +1119,7 @@ function RecipesSearch() {
               </div>
             </div> */}
           </div>
-          <div className="row mb-lg-11 mb-8">
+          <div className="row  mb-8 mt-lg-11">
             <div className="col d-flex justify-content-end  me-lg-4">
               <div
                 className="btn-toolbar"
@@ -1155,8 +1155,8 @@ function RecipesSearch() {
                   >
                     4
                   </button>
-                  <button type="button" className="pageBtn btn btn-neutral-3">
-                    <span className="material-symbols-outlined text-primary-1 fs-lg-6 align-middle">
+                  <button type="button" className="pageBtn btn btn-neutral-3 d-flex align-items-center justify-content-center">
+                    <span className="material-symbols-outlined text-primary-1 fs-lg-8 fs-9 align-middle">
                       <a href="#"> arrow_forward_ios</a>
                     </span>
                   </button>
@@ -1166,19 +1166,19 @@ function RecipesSearch() {
           </div>
         </div>
       </div>
-      <div className="section-rs3 mt-lg-15 mt-10 pb-lg-15">
+      <div className="section-rs3  mt-10 ">
         <div className="container">
           <div className="rs3-text">
             <h5 className="text-primary-1 text-center mb-lg-4 mb-2 fs-lg-5 fs-8 eng-font">
               Every sip tells a story
             </h5>
-            <h2 className="fw-bold text-primary-1 text-center mb-lg-15 mb-6 fs-7 fs-lg-2">
+            <h2 className="fw-bold text-primary-1 text-center mb-lg-11 mb-6 fs-8 fs-lg-5">
               每一杯，都有故事
             </h2>
           </div>
           <div
             data-aos="fade-right"
-            className="row gx-0 mb-lg-14 mb-9 gradient-border"
+            className="row gx-0 mb-lg-11 mb-9 gradient-border mx-lg-11"
           >
             <div className="col-lg-3 col bg-primary-4 pb-lg-0 pb-10">
               <div className="cross-container">
@@ -1191,9 +1191,9 @@ function RecipesSearch() {
                   <div className="cross-line vertical"></div>
                 </div>
               </div>
-              <div className="rs-content d-flex flex-lg-column align-items-center justify-content-around">
-                <h4 className="text-primary-1 fs-6 fs-lg-4">深受好評</h4>
-                <span className="material-symbols-outlined text-primary-1 fs-lg-3">
+              <div className="rs-content d-flex flex-lg-column align-items-center justify-content-center">
+                <h4 className="text-primary-1 fs-6 fs-lg-5 pb-lg-6">深受好評</h4>
+                <span className="material-symbols-outlined text-primary-1 fs-lg-3 pb-lg-11">
                   thumb_up
                 </span>
                 <button className="btn-rs-primary-3 border-0 rounded-0 py-lg-3 py-1 px-lg-9 mt-lg-0 fs-lg-6 fs-8">
@@ -1215,7 +1215,7 @@ function RecipesSearch() {
                         />
                       </a>
                     </div>
-                    <div className="title text-white fs-lg-6 mt-lg-6 mt-md-4 mt-2">
+                    <div className="title text-white fs-lg-7 mt-lg-6 mt-md-4 mt-2">
                       奧綸莉 Daiquiri
                     </div>
 
@@ -1246,7 +1246,7 @@ function RecipesSearch() {
                       </a>
                     </div>
 
-                    <div className="title text-white fs-lg-6 mt-lg-6 mt-md-4 mt-2">
+                    <div className="title text-white fs-lg-7 mt-lg-6 mt-md-4 mt-2">
                       琴湯尼 Gin Tonic
                     </div>
 
@@ -1273,7 +1273,7 @@ function RecipesSearch() {
                       </a>
                     </div>
 
-                    <div className="title text-white fs-lg-6 mt-lg-6 mt-md-4 mt-2 fs-8">
+                    <div className="title text-white fs-lg-7 mt-lg-6 mt-md-4 mt-2 fs-8">
                       曼哈頓 Manhattam
                     </div>
 
@@ -1299,7 +1299,7 @@ function RecipesSearch() {
                         />
                       </a>
                     </div>
-                    <div className="title text-white fs-lg-6 mt-lg-6 mt-md-4 mt-2">
+                    <div className="title text-white fs-lg-7 mt-lg-6 mt-md-4 mt-2">
                       奧綸莉 Daiquiri
                     </div>
 
@@ -1330,7 +1330,7 @@ function RecipesSearch() {
                       </a>
                     </div>
 
-                    <div className="title text-white fs-lg-6 mt-lg-6 mt-md-4 mt-2">
+                    <div className="title text-white fs-lg-7 mt-lg-6 mt-md-4 mt-2">
                       琴湯尼 Gin Tonic
                     </div>
 
@@ -1357,7 +1357,7 @@ function RecipesSearch() {
                       </a>
                     </div>
 
-                    <div className="title text-white fs-lg-6 mt-lg-6 mt-md-4 mt-2 fs-8">
+                    <div className="title text-white fs-lg-7 mt-lg-6 mt-md-4 mt-2 fs-8">
                       曼哈頓 Manhattam
                     </div>
 
@@ -1385,7 +1385,7 @@ function RecipesSearch() {
           </div>
           <div
             data-aos="fade-right"
-            className="row gx-0 mb-lg-14 mb-13 gradient-border"
+            className="row gx-0 mb-lg-14 mb-13 gradient-border mx-lg-11"
           >
             <div className="col-lg-3 col bg-primary-1 pb-lg-0 pb-10">
               <div className="cross-container">
@@ -1399,9 +1399,9 @@ function RecipesSearch() {
                 </div>
               </div>
 
-              <div className="rs-content d-flex flex-lg-column align-items-center justify-content-around">
-                <h4 className="text-primary-4 fs-6 fs-lg-4">熱門話題</h4>
-                <span className="material-symbols-outlined text-primary-4 fs-lg-3">
+              <div className="rs-content d-flex flex-lg-column align-items-center justify-content-center">
+                <h4 className="text-primary-4 fs-6 fs-lg-4 pb-lg-6">熱門話題</h4>
+                <span className="material-symbols-outlined text-primary-4 fs-lg-3 pb-lg-11">
                   forum
                 </span>
                 <button className="btn-rs-primary-4 rounded-0 border-0 py-lg-3 px-lg-9 mt-lg-0 fs-lg-6 fs-8">
@@ -1424,7 +1424,7 @@ function RecipesSearch() {
                       </a>
                     </div>
 
-                    <div className="title text-white fs-lg-6 fs-8 mt-lg-6 mt-md-4 mt-2">
+                    <div className="title text-white fs-lg-7 fs-8 mt-lg-6 mt-md-4 mt-2">
                       瑪格麗特 Margarita
                     </div>
                     <div className="commits text-white mt-lg-4 mt-md-4 mt-2 fs-9 fs-lg-7">
@@ -1446,7 +1446,7 @@ function RecipesSearch() {
                       </a>
                     </div>
 
-                    <div className="title text-white fs-lg-6 fs-8 mt-lg-6 mt-md-4 mt-2">
+                    <div className="title text-white fs-lg-7 fs-8 mt-lg-6 mt-md-4 mt-2">
                       老廣場 Vieux Carre
                     </div>
                     <div className="commits text-white mt-lg-4 mt-md-4 mt-2 fs-9 fs-lg-7">
@@ -1467,7 +1467,7 @@ function RecipesSearch() {
                       </a>
                     </div>
 
-                    <div className="title text-white fs-lg-6 mt-lg-6 mt-md-4 mt-2">
+                    <div className="title text-white fs-lg-7 mt-lg-6 mt-md-4 mt-2">
                       教父 Godfather
                     </div>
 
@@ -1489,7 +1489,7 @@ function RecipesSearch() {
                       </a>
                     </div>
 
-                    <div className="title text-white fs-lg-6 fs-8 mt-lg-6 mt-md-4 mt-2">
+                    <div className="title text-white fs-lg-7 fs-8 mt-lg-6 mt-md-4 mt-2">
                       瑪格麗特 Margarita
                     </div>
                     <div className="commits text-white mt-lg-4 mt-md-4 mt-2 fs-9 fs-lg-7">
@@ -1511,7 +1511,7 @@ function RecipesSearch() {
                       </a>
                     </div>
 
-                    <div className="title text-white fs-lg-6 fs-8 mt-lg-6 mt-md-4 mt-2">
+                    <div className="title text-white fs-lg-7 fs-8 mt-lg-6 mt-md-4 mt-2">
                       老廣場 Vieux Carre
                     </div>
                     <div className="commits text-white mt-lg-4 mt-md-4 mt-2 fs-9 fs-lg-7">
@@ -1532,7 +1532,7 @@ function RecipesSearch() {
                       </a>
                     </div>
 
-                    <div className="title text-white fs-lg-6 mt-lg-6 mt-md-4 mt-2">
+                    <div className="title text-white fs-lg-7 mt-lg-6 mt-md-4 mt-2">
                       教父 Godfather
                     </div>
 

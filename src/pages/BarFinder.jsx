@@ -492,7 +492,7 @@ function BarFinder() {
                     清除所有條件
                   </p>
                   <p className="text-white me-lg-4 d-none d-md-block">
-                    {" "}
+                    
                     排序：
                   </p>
                   <p className="text-white me-lg-4 me-3 d-none d-md-block">
