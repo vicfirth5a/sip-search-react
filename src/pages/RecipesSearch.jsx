@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
 import Swiper from "swiper/bundle";
 import "swiper/css/bundle";
 import axios from "axios";
@@ -10,11 +10,12 @@ function RecipesSearch() {
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 6;
 
-
   const getProducts = async (page = 1) => {
     try {
-      const res = await axios.get(`${baseUrl}/recipes?_page=${page}&_limit=${cardsPerPage}`);
-      console.log("取得產品成功",res.data);
+      const res = await axios.get(
+        `${baseUrl}/recipes?_page=${page}&_limit=${cardsPerPage}`
+      );
+      console.log("取得產品成功", res.data);
       setProducts(res.data);
     } catch (error) {
       console.error("取得產品失敗", error);
@@ -22,9 +23,9 @@ function RecipesSearch() {
     }
   };
 
-  useEffect(() => {
-    getProducts();
-  }, []);
+  // useEffect(() => {
+  //   getProducts();
+  // }, []);
 
   useEffect(() => {
     new Swiper(".mySwiper-rs", {
@@ -49,6 +50,26 @@ function RecipesSearch() {
     });
   }, []);
 
+  //bar左右滑動
+  const scrollContainerRef1 = useRef(null);
+  const scrollContainerRef2 = useRef(null);
+  const scrollContainerRef3 = useRef(null);
+  const scrollAmount = 150;
+  const scrollLeft = (ref) => {
+    ref.current?.scrollBy({
+      left: -scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
+  const scrollRight = (ref) => {
+    ref.current?.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
+
   return (
     <>
       <div className="section-rs1">
@@ -56,21 +77,21 @@ function RecipesSearch() {
           <div className="banner-rs">
             <h6
               data-aos="fade-up"
-              className="fw-bold text-primary-1 position-relative text-center z-3 fs-lg-1 fs-md-4 mb-md-11 mb-6"
+              className="fw-bold text-primary-1 position-relative text-center z-3 fs-7 fs-md-5"
             >
               在家調出酒吧級質感，品味專屬調酒
             </h6>
 
             <div
               data-aos="fade-up"
-              className="input-group boder-primary-1 d-flex align-items-center mt-lg-8"
+              className="input-group boder-primary-1 d-flex align-items-center mt-lg-8 mt-3"
             >
               <label htmlFor="search" className="form-label d-none">
                 搜尋
               </label>
               <input
                 type="text"
-                className="form-control fs-lg-6 fs-md-8 fs-9"
+                className="form-control p-2 py-md-3 px-md-6 search-input"
                 id="search"
                 placeholder="立即搜尋"
                 aria-label="立即搜尋"
@@ -93,32 +114,33 @@ function RecipesSearch() {
 
         <div className="container overflow-x-hidden overflow-y-hidden">
           <div className="row px-lg-0 px-6 mb-6">
-            <div className="col-12 mt-lg-15 mt-10">
+            <div className="col-12 mt-lg-11 mt-10">
               <h2
                 data-aos="fade-up"
-                className="fw-bold text-primary-1 text-center fs-lg-2 fs-7 mb-lg-15 mb-6"
+                className="fw-bold text-primary-1 text-center fs-lg-5 fs-7 mb-lg-12 mb-6"
               >
                 輕鬆篩選，找到你的完美調酒
               </h2>
               <div className="row align-items-center mb-lg-9 mb-6">
                 <div className="col-lg-1 col-2">
-                  <h5 className="text-primary-1 fs-8 fs-lg-5">基酒</h5>
+                  <h5 className="text-primary-1 fs-9 fs-lg-7 pe-lg-4">基酒</h5>
                 </div>
                 <div className="col-lg-11 col-10 g-0">
-                  <div className="border-lg py-lg-6 d-flex justify-content-between align-items-center">
-                    <a
-                      href="javascript:void(0);"
+                  <div className="border-lg py-lg-3 d-flex justify-content-between align-items-center">
+                    <button
+                      type="button"
+                      onClick={() => scrollLeft(scrollContainerRef1)}
                       className="scroll-control"
-                      id="scroll-left-btn"
                     >
-                      <span className="material-symbols-outlined text-primary-3 ps-lg-10 fs-lg-4 fs-6">
+                      <span className="material-symbols-outlined text-primary-3 ps-lg-10 fs-8 d-flex align-items-center">
                         arrow_back_ios
                       </span>
-                    </a>
-
+                    </button>
                     <div
-                      className="overflow-x-scroll scrollBar scroll-container"
+                      ref={scrollContainerRef1}
+                      className="overflow-x-scroll scrollBar"
                       id="scroll-container"
+                      style={{ overflowX: "auto" }}
                     >
                       <div
                         className="btn-group"
@@ -127,183 +149,107 @@ function RecipesSearch() {
                       >
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           琴酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           伏特加
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           白蘭地
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           蘭姆酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           龍舌蘭
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           威士忌
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           苦艾酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           琴酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           伏特加
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
+                        >
+                          白蘭地
+                        </button>
+                        <button
+                          type="button"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           白蘭地
                         </button>
                       </div>
                     </div>
-
-                    <a
-                      href="javascript:void(0);"
+                    <button
+                      type="button"
+                      onClick={() =>scrollRight(scrollContainerRef1)}
                       className="scroll-control"
-                      id="scroll-right-btn"
                     >
-                      <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-lg-4 fs-6">
+                      <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-8 d-flex align-items-center">
                         arrow_forward_ios
                       </span>
-                    </a>
+                    </button>
                   </div>
-                  {/* <!-- <div
-                  className="border-lg py-lg-6 d-flex justify-content-between align-items-center"
-                >
-                  <a
-                    href="javascript:void(0);"
-                    className="scroll-control"
-                    id="scroll-left-btn"
-                  >
-                    <span
-                      className="material-symbols-outlined text-primary-3 ps-lg-10 fs-lg-4 fs-6"
-                    >
-                      arrow_back_ios
-                    </span>
-                  </a>
-
-                  <div
-                    className="overflow-x-scroll scrollBar scroll-container"
-                    id="scroll-container"
-                  >
-                    <div
-                      className="btn-group"
-                      role="group"
-                      aria-label="Basic outlined example"
-                    >
-                      <button
-                        type="button"
-                        className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6"
-                      >
-                        琴酒
-                      </button>
-                      <button
-                        type="button"
-                        className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6"
-                      >
-                        伏特加
-                      </button>
-                      <button
-                        type="button"
-                        className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6"
-                      >
-                        白蘭地
-                      </button>
-                      <button
-                        type="button"
-                        className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6"
-                      >
-                        蘭姆酒
-                      </button>
-                      <button
-                        type="button"
-                        className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6"
-                      >
-                        龍舌蘭
-                      </button>
-                      <button
-                        type="button"
-                        className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6"
-                      >
-                        威士忌
-                      </button>
-                      <button
-                        type="button"
-                        className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6"
-                      >
-                        苦艾酒
-                      </button>
-                      <button
-                        type="button"
-                        className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6"
-                      >
-                        苦艾酒
-                      </button>
-                    </div>
-                  </div>
-
-                  <a
-                    href="javascript:void(0);"
-                    className="scroll-control"
-                    id="scroll-right-btn"
-                    ><span
-                      className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-lg-4 fs-6"
-                      >arrow_forward_ios
-                    </span></a
-                  >
-                </div> --> */}
                 </div>
               </div>
               <div className="row align-items-center mb-lg-9 mb-3">
                 <div className="col-lg-1 col-2 mb-6">
-                  <h5 className="text-primary-1 fs-8 fs-lg-5">果酒</h5>
+                  <h5 className="text-primary-1 fs-9 fs-lg-7 text-nowrap">
+                    果酒
+                  </h5>
                 </div>
                 <div className="col-lg-5 col-10 g-0 mb-6">
-                  <div className="border-lg py-lg-6 d-flex justify-content-between align-items-center">
-                    <a
-                      href="javascript:void(0);"
+                  <div className="border-lg py-lg-3 d-flex justify-content-between align-items-center">
+                    <button
+                      type="button"
+                      onClick={() => scrollLeft(scrollContainerRef2)}
                       className="scroll-control"
-                      id="scroll-left-btn-1"
                     >
-                      <span className="material-symbols-outlined text-primary-3 ps-lg-10 fs-lg-4 fs-6">
+                      <span className="material-symbols-outlined text-primary-3 ps-lg-10 fs-8 d-flex align-items-center">
                         arrow_back_ios
                       </span>
-                    </a>
+                    </button>
 
                     <div
-                      className="overflow-x-scroll scrollBar scroll-container"
-                      id="scroll-container-1"
+                      ref={scrollContainerRef2}
+                      className="overflow-x-scroll scrollBar"
+                      id="scroll-container"
+                      style={{ overflowX: "auto" }}
                     >
                       <div
                         className="btn-group"
@@ -312,84 +258,88 @@ function RecipesSearch() {
                       >
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           啤酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           甜酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           葡萄酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           蘭姆酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           龍舌蘭
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           威士忌
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           苦艾酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           苦艾酒
                         </button>
                       </div>
                     </div>
 
-                    <a
-                      href="javascript:void(0);"
+                    <button
+                      type="button"
+                      onClick={() =>scrollRight(scrollContainerRef2)}
                       className="scroll-control"
-                      id="scroll-right-btn-1"
                     >
-                      <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-lg-4 fs-6">
+                      <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-8 d-flex align-items-center">
                         arrow_forward_ios
                       </span>
-                    </a>
+                    </button>
                   </div>
                 </div>
                 <div className="col-lg-1 col-2 mb-6">
-                  <h5 className="text-primary-1 fs-8 fs-lg-5">點綴</h5>
+                  <h5 className="text-primary-1 fs-9 fs-lg-7 text-nowrap ps-3">
+                    點綴
+                  </h5>
                 </div>
                 <div className="col-lg-5 col-10 g-0 mb-6">
-                  <div className="border-lg py-lg-6 d-flex justify-content-between align-items-center">
-                    <a
-                      href="javascript:void(0);"
+                  <div className="border-lg py-lg-3 d-flex justify-content-between align-items-center">
+                  <button
+                      type="button"
+                      onClick={() => scrollLeft(scrollContainerRef3)}
                       className="scroll-control"
-                      id="scroll-left-btn-2"
                     >
-                      <span className="material-symbols-outlined text-primary-3 ps-lg-10 fs-lg-4 fs-6">
+                      <span className="material-symbols-outlined text-primary-3 ps-lg-10 fs-8 d-flex align-items-center">
                         arrow_back_ios
                       </span>
-                    </a>
+                    </button>
 
                     <div
-                      className="overflow-x-scroll scrollBar scroll-container"
-                      id="scroll-container-2"
+                      ref={scrollContainerRef3}
+                      className="overflow-x-scroll scrollBar"
+                      id="scroll-container"
+                      style={{ overflowX: "auto" }}
                     >
                       <div
                         className="btn-group"
@@ -398,105 +348,101 @@ function RecipesSearch() {
                       >
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           水果
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           果汁
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           可可粉
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           蘭姆酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           龍舌蘭
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           威士忌
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           苦艾酒
                         </button>
                         <button
                           type="button"
-                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-6 py-lg-3 px-lg-6 me-1"
+                          className="wineBtn wineBtn-outline rounded-pill me-lg-6 fs-lg-8 fs-10 py-lg-2 px-lg-4 me-1"
                         >
                           苦艾酒
                         </button>
                       </div>
                     </div>
 
-                    <a
-                      href="javascript:void(0);"
+                    <button
+                      type="button"
+                      onClick={() =>scrollRight(scrollContainerRef3)}
                       className="scroll-control"
-                      id="scroll-right-btn-2"
                     >
-                      <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-lg-4 fs-6">
+                      <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-8 d-flex align-items-center">
                         arrow_forward_ios
                       </span>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
-              <div className="row mb-lg-13 justify-content-between">
-                <div className="col ms-lg-14">
-                  <div
-                    className="btn-group"
-                    role="group"
-                    aria-label="Basic outlined example"
-                  >
+              <div className="row mb-lg-11 justify-content-between">
+                <div className="col-8 col-lg-7 ms-lg-14 d-flex">
+                  <div role="group" aria-label="Basic outlined example">
                     <button
                       type="button"
-                      className="btn active btn-outline-primary-3 rounded-pill me-lg-6 me-3 fs-lg-6 fs-10 py-lg-3 px-lg-5 text-primary-1 text-nowrap"
+                      className="btn active btn-outline-primary-3 rounded-pill me-lg-6 me-1 fs-lg-8 fs-10 py-lg-2 py-1 px-lg-4 px-2 me-1 text-primary-1 text-nowrap"
                     >
                       琴酒
-                      <span className="material-symbols-outlined align-middle fs-10 fs-lg-6 ms-3">
+                      <span className="material-symbols-outlined align-middle fs-10 fs-lg-6 ms-lg-3">
                         close
                       </span>
                     </button>
                     <button
                       type="button"
-                      className="btn active btn-outline-primary-3 rounded-pill me-lg-6 me-3 fs-lg-6 fs-10 py-lg-3 px-lg-5 text-primary-1 text-nowrap"
+                      className="btn active btn-outline-primary-3 rounded-pill me-lg-6 me-1 fs-lg-8 fs-10 py-lg-2 py-1 px-lg-4 px-2 me-1 text-primary-1 text-nowrap"
                     >
                       甜酒
-                      <span className="material-symbols-outlined align-middle fs-10 fs-lg-6 ms-3">
+                      <span className="material-symbols-outlined align-middle fs-10 fs-lg-6 ms-lg-3">
                         close
                       </span>
                     </button>
                     <button
                       type="button"
-                      className="btn active btn-outline-primary-3 rounded-pill me-lg-6 fs-lg-6 fs-10 py-lg-3 px-lg-5 text-primary-1 text-nowrap"
+                      className="btn active btn-outline-primary-3 rounded-pill me-lg-6 me-1 fs-lg-8 fs-10 py-lg-2 py-1 px-lg-4 px-2 me-1 text-primary-1 text-nowrap"
                     >
                       水果
-                      <span className="material-symbols-outlined align-middle fs-10 fs-lg-6 ms-3">
+                      <span className="material-symbols-outlined align-middle fs-10 fs-lg-6 ms-lg-3">
                         close
                       </span>
                     </button>
                   </div>
                 </div>
 
-                <div className="col d-flex align-items-center justify-content-end">
+                <div className="col-4 d-flex align-items-center justify-content-end text-nowrap">
                   <p className="text-primary-1 me-lg-6 me-3 ms-10 fs-lg-8 fs-10">
                     清除所有條件
                   </p>
@@ -1173,8 +1119,8 @@ function RecipesSearch() {
               </div>
             </div> */}
           </div>
-          <div className="row mt-11 mt-lg-0">
-            <div className="col d-flex justify-content-end">
+          <div className="row mb-lg-11 mb-8">
+            <div className="col d-flex justify-content-end  me-lg-4">
               <div
                 className="btn-toolbar"
                 role="toolbar"
@@ -1187,25 +1133,25 @@ function RecipesSearch() {
                 >
                   <button
                     type="button"
-                    className="pageBtn btn btn-primary-3 text-primary-1 fs-lg-6 me-lg-2 me-2"
+                    className="pageBtn btn btn-primary-3 text-primary-1 fs-lg-8 fs-9 me-lg-2 me-2 d-flex align-items-center"
                   >
                     1
                   </button>
                   <button
                     type="button"
-                    className="pageBtn btn btn-neutral-3 text-primary-1 fs-lg-6 me-lg-2 me-2"
+                    className="pageBtn btn btn-neutral-3 text-primary-1 fs-lg-8 fs-9 me-lg-2 me-2 d-flex align-items-center"
                   >
                     2
                   </button>
                   <button
                     type="button"
-                    className="pageBtn btn btn-neutral-3 text-primary-1 fs-lg-6 me-lg-2 me-2"
+                    className="pageBtn btn btn-neutral-3 text-primary-1 fs-lg-8 fs-9 me-lg-2 me-2 d-flex align-items-center"
                   >
                     3
                   </button>
                   <button
                     type="button"
-                    className="pageBtn btn btn-neutral-3 text-primary-1 fs-lg-6 me-lg-2 me-2"
+                    className="pageBtn btn btn-neutral-3 text-primary-1 fs-lg-8 fs-9 me-lg-2 me-2 d-flex align-items-center"
                   >
                     4
                   </button>
