@@ -447,7 +447,7 @@ function RecipesSearch() {
                     清除所有條件
                   </p>
                   <p className="text-white me-lg-4 d-none d-md-block">
-                    {" "}
+                    
                     排序：
                   </p>
                   <p className="text-white me-lg-4 me-3 d-none d-md-block">
@@ -1120,7 +1120,7 @@ function RecipesSearch() {
             </div> */}
           </div>
           <div className="row  mb-8 mt-lg-11">
-            <div className="col d-flex justify-content-end  me-lg-4">
+            <div className="col d-flex justify-content-end mt-lg-0 mt-4 me-lg-4">
               <div
                 className="btn-toolbar"
                 role="toolbar"
