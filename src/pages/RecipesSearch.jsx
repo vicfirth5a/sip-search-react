@@ -7,26 +7,66 @@ const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function RecipesSearch() {
   const [products, setProducts] = useState([]);
+  const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
   const cardsPerPage = 6;
 
   const getProducts = async (page = 1) => {
     try {
       const res = await axios.get(
-        `${baseUrl}/recipes?_page=${page}&_limit=${cardsPerPage}`
+        `${baseUrl}/recipes?_page=${page}&_per_page=${cardsPerPage}`
       );
       console.log("取得產品成功", res.data);
-      setProducts(res.data);
+      setProducts(res.data.data);
+      setCurrentPage(page);
     } catch (error) {
       console.error("取得產品失敗", error);
       alert("取得產品失敗");
     }
   };
-
+  
+  
   useEffect(() => {
     getProducts();
   }, []);
 
+  const filterProducts = (products, searchTerm) => {
+    if (!searchTerm) return products;
+    const lowerSearch = searchTerm.toLowerCase();
+    return products.filter((product) => {
+      const title = product.title ? product.title.toLowerCase() : "";
+      const titleEn = product.title_en ? product.title_en.toLowerCase() : "";
+      const content = product.content ? product.content.toLowerCase() : "";
+      return (
+        title.includes(lowerSearch) ||
+        titleEn.includes(lowerSearch) ||
+        content.includes(lowerSearch)
+      );
+    });
+  };
+
+  const handleSearch = () => {
+    if (!searchTerm) {
+      getProducts(currentPage);
+    } else {
+      const filteredProducts = filterProducts(products, searchTerm);
+      if (filteredProducts.length > 0) {
+        setProducts(filteredProducts);
+      } else {
+        getProducts(1); // 這裡強制回到第 1 頁，避免搜尋後的分頁錯亂
+      }
+    }
+  };
+  
+
+  //分頁
+  const handlePageChange = (page) => {
+    console.log(page)
+    getProducts(page);
+
+  };
+
+  //swiper
   useEffect(() => {
     new Swiper(".mySwiper-rs", {
       slidesPerView: "auto",
@@ -69,7 +109,6 @@ function RecipesSearch() {
     });
   };
 
-
   return (
     <>
       <div className="section-rs1">
@@ -96,15 +135,18 @@ function RecipesSearch() {
                 placeholder="立即搜尋"
                 aria-label="立即搜尋"
                 aria-describedby="button-addon2"
+                value={searchTerm}
+                onChange={(e) => setSearchTerm(e.target.value)}
               />
-              <a href="#" className="p-lg-3 p-md-2 p-1">
-                <span
-                  href="#"
-                  className="material-symbols-outlined text-primary-1 align-middle fs-lg-5 fs-md-7 fs-8"
-                >
+              <button
+                className="p-lg-3 p-md-2 p-1 btn-no-bg "
+                type="button"
+                onClick={handleSearch}
+              >
+                <span className="material-symbols-outlined text-primary-1 align-middle fs-lg-5 fs-md-7 fs-8">
                   search
                 </span>
-              </a>
+              </button>
             </div>
           </div>
         </div>
@@ -217,7 +259,7 @@ function RecipesSearch() {
                     </div>
                     <button
                       type="button"
-                      onClick={() =>scrollRight(scrollContainerRef1)}
+                      onClick={() => scrollRight(scrollContainerRef1)}
                       className="scroll-control"
                     >
                       <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-8 d-flex align-items-center">
@@ -309,7 +351,7 @@ function RecipesSearch() {
 
                     <button
                       type="button"
-                      onClick={() =>scrollRight(scrollContainerRef2)}
+                      onClick={() => scrollRight(scrollContainerRef2)}
                       className="scroll-control"
                     >
                       <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-8 d-flex align-items-center">
@@ -325,7 +367,7 @@ function RecipesSearch() {
                 </div>
                 <div className="col-lg-5 col-10 g-0 mb-6">
                   <div className="border-lg py-lg-3 d-flex justify-content-between align-items-center">
-                  <button
+                    <button
                       type="button"
                       onClick={() => scrollLeft(scrollContainerRef3)}
                       className="scroll-control"
@@ -399,7 +441,7 @@ function RecipesSearch() {
 
                     <button
                       type="button"
-                      onClick={() =>scrollRight(scrollContainerRef3)}
+                      onClick={() => scrollRight(scrollContainerRef3)}
                       className="scroll-control"
                     >
                       <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-8 d-flex align-items-center">
@@ -446,10 +488,7 @@ function RecipesSearch() {
                   <p className="text-primary-1 me-lg-6 me-3 ms-10 fs-lg-8 fs-10">
                     清除所有條件
                   </p>
-                  <p className="text-white me-lg-4 d-none d-md-block">
-                    
-                    排序：
-                  </p>
+                  <p className="text-white me-lg-4 d-none d-md-block">排序：</p>
                   <p className="text-white me-lg-4 me-3 d-none d-md-block">
                     <a href="#">熱門程度</a>
                   </p>
@@ -1119,7 +1158,7 @@ function RecipesSearch() {
               </div>
             </div> */}
           </div>
-          <div className="row  mb-8 mt-lg-11">
+          {/* <div className="row  mb-8 mt-lg-11">
             <div className="col d-flex justify-content-end mt-lg-0 mt-4 me-lg-4">
               <div
                 className="btn-toolbar"
@@ -1155,11 +1194,46 @@ function RecipesSearch() {
                   >
                     4
                   </button>
-                  <button type="button" className="pageBtn btn btn-neutral-3 d-flex align-items-center justify-content-center">
+                  <button
+                    type="button"
+                    className="pageBtn btn btn-neutral-3 d-flex align-items-center justify-content-center"
+                  >
                     <span className="material-symbols-outlined text-primary-1 fs-lg-8 fs-9 align-middle">
                       <a href="#"> arrow_forward_ios</a>
                     </span>
                   </button>
+                </div>
+              </div>
+            </div>
+          </div> */}
+          <div className="row mb-8 mt-lg-11">
+            <div className="col d-flex justify-content-end mt-lg-0 mt-4 me-lg-4">
+              <div
+                className="btn-toolbar"
+                role="toolbar"
+                aria-label="Toolbar with button groups"
+              >
+                <div
+                  className="btn-group me-2"
+                  role="group"
+                  aria-label="First group"
+                >
+                  {[...Array(Math.ceil(18 / cardsPerPage)).keys()].map(
+                    (page) => (
+                      <button
+                        key={page + 1}
+                        type="button"
+                        className={`pageBtn btn ${
+                          currentPage === page + 1
+                            ? "btn-primary-3"
+                            : "btn-neutral-3"
+                        } text-primary-1 fs-lg-8 fs-9 me-lg-2 me-2 d-flex align-items-center`}
+                        onClick={() => handlePageChange(page + 1)}
+                      >
+                        {page + 1}
+                      </button>
+                    )
+                  )}
                 </div>
               </div>
             </div>
@@ -1192,7 +1266,9 @@ function RecipesSearch() {
                 </div>
               </div>
               <div className="rs-content d-flex flex-lg-column align-items-center justify-content-center">
-                <h4 className="text-primary-1 fs-6 fs-lg-5 pb-lg-6">深受好評</h4>
+                <h4 className="text-primary-1 fs-6 fs-lg-5 pb-lg-6">
+                  深受好評
+                </h4>
                 <span className="material-symbols-outlined text-primary-1 fs-lg-3 pb-lg-11">
                   thumb_up
                 </span>
@@ -1400,7 +1476,9 @@ function RecipesSearch() {
               </div>
 
               <div className="rs-content d-flex flex-lg-column align-items-center justify-content-center">
-                <h4 className="text-primary-4 fs-6 fs-lg-4 pb-lg-6">熱門話題</h4>
+                <h4 className="text-primary-4 fs-6 fs-lg-4 pb-lg-6">
+                  熱門話題
+                </h4>
                 <span className="material-symbols-outlined text-primary-4 fs-lg-3 pb-lg-11">
                   forum
                 </span>
