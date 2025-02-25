@@ -184,6 +184,12 @@ $x-large: 1200px;
       border: none;
     }
   }
+  .scroll-control {
+    all: unset; /* 移除所有預設樣式 */
+    display: flex; /* 確保按鈕仍然可以點擊 */
+    align-items: center;
+    cursor: pointer; /* 保持可點擊狀態 */
+  }
 }
 
 .bar-card {

@@ -1,6 +1,25 @@
-import React from "react";
+import React, {useRef} from "react";
 
 function BarFinder() {
+ //bar點擊左右滑動
+  const scrollContainerRef1 = useRef(null);
+  const scrollContainerRef2 = useRef(null);
+  const scrollContainerRef3 = useRef(null);
+  const scrollAmount = 150;
+  const scrollLeft = (ref) => {
+    ref.current?.scrollBy({
+      left: -scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
+  const scrollRight = (ref) => {
+    ref.current?.scrollBy({
+      left: scrollAmount,
+      behavior: "smooth",
+    });
+  };
+
   return (
     <>
       <section
@@ -134,19 +153,21 @@ function BarFinder() {
                 </div>
                 <div className="col-10 col-lg-11 g-0">
                   <div className="border-lg py-lg-3 d-flex justify-content-between align-items-center">
-                    <a
-                      href="javascript:void(0);"
+                  <button
+                      type="button"
+                      onClick={() => scrollLeft(scrollContainerRef1)}
                       className="scroll-control"
-                      id="scroll-left-btn"
                     >
                       <span className="material-symbols-outlined text-primary-3 ps-lg-10 fs-8 d-flex align-items-center">
                         arrow_back_ios
                       </span>
-                    </a>
+                    </button>
 
                     <div
-                      className="overflow-x-scroll scrollBar scroll-container"
+                      ref={scrollContainerRef1}
+                      className="overflow-x-scroll scrollBar"
                       id="scroll-container"
+                      style={{ overflowX: "auto" }}
                     >
                       <div
                         className="btn-group"
@@ -276,15 +297,15 @@ function BarFinder() {
                       </div>
                     </div>
 
-                    <a
-                      href="javascript:void(0);"
+                    <button
+                      type="button"
+                      onClick={() =>scrollRight(scrollContainerRef1)}
                       className="scroll-control"
-                      id="scroll-right-btn"
                     >
                       <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-8 d-flex align-items-center">
                         arrow_forward_ios
                       </span>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
@@ -296,19 +317,21 @@ function BarFinder() {
                 </div>
                 <div className="col-lg-5 col-9 g-0 mb-6">
                   <div className="border-lg py-lg-3 d-flex justify-content-between align-items-center">
-                    <a
-                      href="javascript:void(0);"
+                  <button
+                      type="button"
+                      onClick={() => scrollLeft(scrollContainerRef2)}
                       className="scroll-control"
-                      id="scroll-left-btn-1"
                     >
                       <span className="material-symbols-outlined text-primary-3 ps-lg-10 fs-8 d-flex align-items-center">
                         arrow_back_ios
                       </span>
-                    </a>
+                    </button>
 
                     <div
-                      className="overflow-x-scroll scrollBar scroll-container"
-                      id="scroll-container-1"
+                    ref={scrollContainerRef2}
+                    className="overflow-x-scroll scrollBar"
+                    id="scroll-container"
+                    style={{ overflowX: "auto" }}
                     >
                       <div
                         className="btn-group"
@@ -372,15 +395,15 @@ function BarFinder() {
                       </div>
                     </div>
 
-                    <a
-                      href="javascript:void(0);"
+                    <button
+                      type="button"
+                      onClick={() =>scrollRight(scrollContainerRef2)}
                       className="scroll-control"
-                      id="scroll-right-btn-1"
                     >
                       <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-8 d-flex align-items-center">
                         arrow_forward_ios
                       </span>
-                    </a>
+                    </button>
                   </div>
                 </div>
                 <div className="col-lg-1 col-3 mb-6">
@@ -390,19 +413,21 @@ function BarFinder() {
                 </div>
                 <div className="col-lg-5 col-9 g-0 mb-6">
                   <div className="border-lg py-lg-3 d-flex justify-content-between align-items-center">
-                    <a
-                      href="javascript:void(0);"
+                  <button
+                      type="button"
+                      onClick={() => scrollLeft(scrollContainerRef3)}
                       className="scroll-control"
-                      id="scroll-left-btn-2"
                     >
                       <span className="material-symbols-outlined text-primary-3 ps-lg-10 fs-8 d-flex align-items-center">
                         arrow_back_ios
                       </span>
-                    </a>
+                    </button>
 
                     <div
-                      className="overflow-x-scroll scrollBar scroll-container"
-                      id="scroll-container-2"
+                       ref={scrollContainerRef3}
+                       className="overflow-x-scroll scrollBar"
+                       id="scroll-container"
+                       style={{ overflowX: "auto" }}
                     >
                       <div
                         className="btn-group"
@@ -442,15 +467,15 @@ function BarFinder() {
                       </div>
                     </div>
 
-                    <a
-                      href="javascript:void(0);"
+                    <button
+                      type="button"
+                      onClick={() =>scrollRight(scrollContainerRef3)}
                       className="scroll-control"
-                      id="scroll-right-btn-2"
                     >
                       <span className="material-symbols-outlined text-primary-3 ps-lg-4 pe-lg-10 fs-8 d-flex align-items-center">
                         arrow_forward_ios
                       </span>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </div>
