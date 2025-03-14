@@ -125,9 +125,11 @@ function IndexPage() {
   //註冊的跳轉
   const handleSignup = (e) => {
     e.preventDefault();
-    if (signupEmail) {
-      navigate(`/membersignup?email=${encodeURIComponent(signupEmail)}`);
+    if (!signupEmail.trim()) {
+      alert("請輸入您的 Email");
+      return;
     }
+    navigate(`/membersignup?email=${encodeURIComponent(signupEmail)}`);
   };
   //跳轉前移除backdrop
   const handleTagSelect = (tag) => {
@@ -895,7 +897,7 @@ function IndexPage() {
                   </p>
                   <div className="btn-md">
                     <Link
-                      to={`/ barsearch`}
+                      to={`/barsearch`}
                       className="btn-search btn-index-primary1 d-flex"
                     >
                       我想找酒吧
