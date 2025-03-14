@@ -9,20 +9,22 @@ import { Modal } from "bootstrap";
 import images from "../images";
 import HotRecipeCard from "../components/HotRecipeCard";
 import HotBarCard from "../components/HotBarCard";
+import { useUser } from "../contexts/UserContext";
 
-const baseUrl = import.meta.env.VITE_BASE_URL;
 
 function IndexPage() {
   const [events, setEvents] = useState([]);
   const [latestEvents, setLatestEvents] = useState([]);
+  const { dataAxios } = useUser();
+
 
   //取得所有活動
   const getAllEvents = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/events`);
+      const res = await dataAxios.get('/events'); // 使用 dataAxios
       console.log("取得活動成功", res.data);
       setEvents(res.data);
-      filterLatestEvents(res.data); // 直接傳入取得的資料
+      filterLatestEvents(res.data);
     } catch (error) {
       console.error("取得活動失敗", error);
     }
@@ -57,61 +59,101 @@ function IndexPage() {
   // 分別取得酒吧評論和酒譜評論
   const getBarComments = async () => {
     try {
-      // 1. 先取得評論
-      const commentRes = await axios.get(`${baseUrl}/barcomments`);
-
-      // 2. 針對每個評論取得對應的酒吧資訊
+      const commentRes = await dataAxios.get('/barcomments');
       const commentsWithBarInfo = await Promise.all(
         commentRes.data.map(async (comment) => {
-          const barRes = await axios.get(`${baseUrl}/bars/${comment.barId}`);
-          return {
-            ...comment,
-            type: "bar",
-            date: new Date(comment.createdAt),
-            barName: barRes.data.name, // 加入酒吧名稱
-          };
+          try {
+            const barRes = await dataAxios.get(`/bars/${comment.barId}`);
+            let userInfo = {
+              name: "匿名用戶",
+              imagesUrl: images["Ellipse 7"] // 預設頭像
+            };
+  
+            // 如果有 userId 才嘗試獲取用戶資訊
+            if (comment.userId) {
+              try {
+                const userRes = await dataAxios.get(`/users/${comment.userId}`);
+                userInfo = userRes.data;
+              } catch (userError) {
+                console.log(`無法獲取用戶 ${comment.userId} 的資訊`);
+              }
+            }
+  
+            return {
+              ...comment,
+              type: "bar",
+              date: new Date(comment.createdAt),
+              barName: barRes.data.name,
+              userName: userInfo.name,
+              userAvatar: userInfo.imagesUrl || images["Ellipse 7"]
+            };
+          } catch (error) {
+            console.error(`處理評論 ${comment.id} 時發生錯誤:`, error);
+            return null;
+          }
         })
       );
-
-      // 3. 排序並只取前兩筆
-      const sortedComments = commentsWithBarInfo
+  
+      // 過濾掉 null 值並排序
+      const validComments = commentsWithBarInfo
+        .filter(comment => comment !== null)
         .sort((a, b) => b.date - a.date)
         .slice(0, 2);
-
-      setBarComments(sortedComments);
+  
+      setBarComments(validComments);
     } catch (error) {
       console.error("取得酒吧評論失敗", error);
+      setBarComments([]); // 設置空陣列避免 undefined 錯誤
     }
   };
 
   const getRecipeComments = async () => {
     try {
-      // 1. 先取得評論
-      const commentRes = await axios.get(`${baseUrl}/recipscomments`);
-
-      // 2. 針對每個評論取得對應的酒譜資訊
+      const commentRes = await dataAxios.get('/recipscomments');
       const commentsWithRecipeInfo = await Promise.all(
         commentRes.data.map(async (comment) => {
-          const recipeRes = await axios.get(
-            `${baseUrl}/recipes/${comment.recipeId}`
-          );
-          return {
-            ...comment,
-            type: "recipe",
-            date: new Date(comment.date),
-            recipeName: recipeRes.data.title, // 加入酒譜名稱
-          };
+          try {
+            const recipeRes = await dataAxios.get(`/recipes/${comment.recipeId}`);
+            let userInfo = {
+              name: "匿名用戶",
+              imagesUrl: images["Ellipse 7"] // 預設頭像
+            };
+  
+            // 如果有 userId 才嘗試獲取用戶資訊
+            if (comment.userId) {
+              try {
+                const userRes = await dataAxios.get(`/users/${comment.userId}`);
+                userInfo = userRes.data;
+              } catch (userError) {
+                console.log(`無法獲取用戶 ${comment.userId} 的資訊`);
+              }
+            }
+  
+            return {
+              ...comment,
+              type: "recipe",
+              date: new Date(comment.createdAt),
+              recipeName: recipeRes.data.title,
+              userName: userInfo.name,
+              userAvatar: userInfo.imagesUrl || images["Ellipse 7"]
+            };
+          } catch (error) {
+            console.error(`處理評論 ${comment.id} 時發生錯誤:`, error);
+            return null;
+          }
         })
       );
-
-      // 3. 排序並只取前兩筆
-      const sortedComments = commentsWithRecipeInfo
+  
+      // 過濾掉 null 值並排序
+      const validComments = commentsWithRecipeInfo
+        .filter(comment => comment !== null)
         .sort((a, b) => b.date - a.date)
         .slice(0, 2);
-
-      setRecipeComments(sortedComments);
+  
+      setRecipeComments(validComments);
     } catch (error) {
       console.error("取得酒譜評論失敗", error);
+      setRecipeComments([]); // 設置空陣列避免 undefined 錯誤
     }
   };
 
@@ -205,7 +247,7 @@ function IndexPage() {
   };
 
   const [searchTerm, setSearchTerm] = useState("");
-  const baseUrl = import.meta.env.VITE_BASE_URL;
+  // const baseUrl = import.meta.env.VITE_BASE_URL;
 
   //首頁搜尋功能
   const handleSearch = async () => {
@@ -214,8 +256,8 @@ function IndexPage() {
 
     try {
       const [recipeRes, barRes] = await Promise.all([
-        axios.get(`${baseUrl}/recipes?search=${term}`),
-        axios.get(`${baseUrl}/bars?search=${term}`),
+        dataAxios.get(`/recipes?search=${term}`), // 使用 dataAxios
+        dataAxios.get(`/bars?search=${term}`),    // 使用 dataAxios
       ]);
 
       const recipeResults = recipeRes.data;
@@ -232,7 +274,7 @@ function IndexPage() {
         // 如果兩邊都有結果，根據相關性決定跳轉目標
         const barRelevance = barResults.some(
           (bar) =>
-            bar.title?.toLowerCase().includes(term.toLowerCase()) ||
+            bar.name?.toLowerCase().includes(term.toLowerCase()) ||
             bar.region?.toLowerCase().includes(term.toLowerCase())
         );
 
@@ -338,8 +380,7 @@ function IndexPage() {
   // 取得所有酒譜
   const fetchRecipes = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/recipes`);
-      // console.log("API 回傳的全部酒譜:", res.data);
+      const res = await dataAxios.get('/recipes'); // 使用 dataAxios
       setAllRecipes(res.data);
     } catch (error) {
       console.error("取得酒譜失敗:", error);
@@ -363,8 +404,7 @@ function IndexPage() {
 
   const fetchBars = async () => {
     try {
-      const res = await axios.get(`${baseUrl}/bars`);
-      // console.log("API 回傳的全部酒吧:", res.data);
+      const res = await dataAxios.get('/bars'); // 使用 dataAxios
       setAllBars(res.data);
     } catch (error) {
       console.error("取得酒吧失敗:", error);
@@ -1169,7 +1209,7 @@ function IndexPage() {
                   data-aos={index === 0 ? "zoom-in-right" : "zoom-in-left"}
                 >
                   <div className="comments-list-item-title d-flex mb-8">
-                    <img src={images["Ellipse 7"]} alt="" />
+                    <img src={comment.userAvatar}  alt="" />
                     <div className="comments-list-item-name ms-5">
                       <h3 className="eng-font fs-7 fs-md-5 text-primary-3 mb-2">
                         {comment.userName}
@@ -1208,7 +1248,7 @@ function IndexPage() {
                   data-aos={index === 0 ? "zoom-in-right" : "zoom-in-left"}
                 >
                   <div className="comments-list-item-title d-flex mb-8">
-                    <img src={images["Ellipse 5"]} alt="" />
+                    <img src={comment.userAvatar}  alt="" />
                     <div className="comments-list-item-name ms-5">
                       <h3 className="eng-font fs-7 fs-md-5 text-primary-3 mb-2">
                         {comment.userName}
@@ -1242,7 +1282,7 @@ function IndexPage() {
           </ul>
         </section>
       </div>
-      <div className="container">
+      <div className="container container-scroll">
         <div className="d-flex justify-content-end custom-padding">
           <button
             className="cardBtn-primary-4 btn btn-size rounded-circle"
