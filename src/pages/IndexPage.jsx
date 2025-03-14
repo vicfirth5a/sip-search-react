@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from "react";
 import Swiper from "swiper/bundle";
 import axios from "axios";
 import "swiper/css/bundle";
+import Swal from "sweetalert2";
+
 import { Link, useNavigate } from "react-router-dom";
 import { Modal } from "bootstrap";
 import images from "../images";
@@ -126,7 +128,31 @@ function IndexPage() {
   const handleSignup = (e) => {
     e.preventDefault();
     if (!signupEmail.trim()) {
-      alert("請輸入您的 Email");
+      Swal.fire({
+        icon: "info",
+        title: "請輸入您的 Email",
+        showClass: {
+          popup: `
+      animate__animated
+      animate__fadeInUp
+      animate__faster
+    `
+        },
+        hideClass: {
+          popup: `
+      animate__animated
+      animate__fadeOutDown
+      animate__faster
+    `
+        },
+        confirmButtonText: "確定",
+        customClass: {
+          popup: "popup",          // 整個彈窗樣式
+          title: "popup-title",          // 標題樣式
+          confirmButton: "popup-btn",    // 按鈕樣式
+          icon: "popup-icon",
+        },
+      });
       return;
     }
     navigate(`/membersignup?email=${encodeURIComponent(signupEmail)}`);

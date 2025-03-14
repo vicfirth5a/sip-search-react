@@ -374,6 +374,62 @@
   }
 }
 
+// 加入會員彈跳視窗
+
+.popup {
+  background: $primary-1;
+  width: 20%;
+
+}
+
+
+.popup-title {
+  color: $primary-4;
+  font-size: 16px;
+
+  @media (max-width: 992px) {
+    font-size: 12px;
+
+  }
+
+}
+
+
+
+.popup-btn {
+  background-color: $primary-3;
+  font-size: 16px;
+
+  @media (max-width: 992px) {
+    font-size: 12px;
+  }
+}
+
+:where(.swal2-icon).swal2-info.popup-icon {
+  color: $neutral-3;
+  border-color: $neutral-3;
+  width: 2em;
+  height: 2em;
+
+  @media (max-width: 992px) {
+    width: 1em;
+    height: 1em;
+    margin-top: 1em;
+  }
+
+  .swal2-icon-content {
+    font-size: 2em;
+
+    @media (max-width: 992px) {
+      font-size: 1em;
+    }
+  }
+
+
+}
+
+
+
 @media (max-width: 767px) {
   .webinfo-2 {
     .join-text {
