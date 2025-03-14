@@ -374,6 +374,61 @@
   }
 }
 
+// 加入會員彈跳視窗
+
+.popup {
+  background: $primary-1;
+  width: 20%;
+
+}
+
+
+.popup-title {
+  color: $primary-4;
+  font-size: 16px;
+
+  @media (max-width: 992px) {
+    font-size: 12px;
+
+  }
+
+}
+
+
+
+.popup-btn {
+  background-color: $primary-3;
+  font-size: 16px;
+
+  @media (max-width: 992px) {
+    font-size: 12px;
+  }
+}
+
+:where(.swal2-icon).swal2-info.popup-icon {
+  color: $neutral-3;
+  border-color: $neutral-3;
+  width: 2em;
+  height: 2em;
+
+  @media (max-width: 992px) {
+    width: 1em;
+    height: 1em;
+    margin-top: 1em;
+  }
+
+  .swal2-icon-content {
+    font-size: 2em;
+
+    @media (max-width: 992px) {
+      font-size: 1em;
+    }
+  }
+
+
+}
+
+
 @media (max-width: 767px) {
   .webinfo-2 {
     .join-text {
@@ -540,7 +595,6 @@ $x-large: 1200px;
 }
 
 .wine-card-body {
-
   .pic {
     width: 50%;
 
@@ -607,8 +661,6 @@ $x-large: 1200px;
     }
   }
 }
-
-
 
 // 熱門酒吧
 
@@ -798,10 +850,12 @@ $x-large: 1200px;
 
   &-bg {
     width: 476px;
-    background-image: linear-gradient(180.02deg,
+    background-image: linear-gradient(
+        180.02deg,
         rgba(0, 0, 0, 0.8) 0.01%,
         rgba(0, 0, 0, 0) 50.5%,
-        rgba(0, 0, 0, 0.8) 99.99%),
+        rgba(0, 0, 0, 0.8) 99.99%
+      ),
       url(../images/index-event-bg.png);
     background-size: cover;
     background-size: 450% auto;
@@ -1003,9 +1057,11 @@ $x-large: 1200px;
   transition: 0.5s;
   color: $primary-1;
   border: 1px solid;
-  border-image-source: linear-gradient(100.25deg,
-      #ffc93d 4.04%,
-      #b5650e 97.53%);
+  border-image-source: linear-gradient(
+    100.25deg,
+    #ffc93d 4.04%,
+    #b5650e 97.53%
+  );
   border-image-slice: 1; //圖像切片設置
   justify-content: center;
   align-items: center;
@@ -1117,6 +1173,19 @@ $x-large: 1200px;
         width: 22px;
         height: 22px;
       }
+    }
+  }
+}
+
+.container-scroll {
+  .btn-size {
+    width: 48px;
+    height: 48px;
+  }
+  .custom-padding {
+    margin-right: -12px;
+    @include respond-to($large) {
+      margin-right: 0;
     }
   }
 }
