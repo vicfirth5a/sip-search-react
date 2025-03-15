@@ -10,7 +10,7 @@ const HotBarCard = ({ bar }) => {
             className="bar-pic"
         />
 
-        <div className="content d-flex position-absolute top-0 bottom-0 w-100 flex-column flex-lg-row">
+        <div className="content d-flex position-absolute top-0 bottom-0 flex-column flex-lg-row">
             <div className="main-content d-flex flex-column justify-content-between flex-grow-1">
                 <h2 className="title fs-6 fs-lg-5">{bar.name}</h2>
 
@@ -26,8 +26,8 @@ const HotBarCard = ({ bar }) => {
 
                         <Link to={`/bar/${bar.id}`} className="btn-md mt-6">
                             <div
-                                
-                                className="btn-search btn-index-primaryl-light d-flex justify-content-between"
+
+                                className="btn-search btn-index-primaryl-light d-flex justify-content-between align-items-center"
                             >
                                 查看更多
                                 <span className="material-symbols-outlined fs-lg-6 fs-7">
