@@ -68,7 +68,7 @@ function IndexPage() {
               name: "匿名用戶",
               imagesUrl: images["Ellipse 7"] // 預設頭像
             };
-  
+
             // 如果有 userId 才嘗試獲取用戶資訊
             if (comment.userId) {
               try {
@@ -78,7 +78,7 @@ function IndexPage() {
                 console.log(`無法獲取用戶 ${comment.userId} 的資訊`);
               }
             }
-  
+
             return {
               ...comment,
               type: "bar",
@@ -93,13 +93,13 @@ function IndexPage() {
           }
         })
       );
-  
+
       // 過濾掉 null 值並排序
       const validComments = commentsWithBarInfo
         .filter(comment => comment !== null)
         .sort((a, b) => b.date - a.date)
         .slice(0, 2);
-  
+
       setBarComments(validComments);
     } catch (error) {
       console.error("取得酒吧評論失敗", error);
@@ -118,7 +118,7 @@ function IndexPage() {
               name: "匿名用戶",
               imagesUrl: images["Ellipse 7"] // 預設頭像
             };
-  
+
             // 如果有 userId 才嘗試獲取用戶資訊
             if (comment.userId) {
               try {
@@ -128,7 +128,7 @@ function IndexPage() {
                 console.log(`無法獲取用戶 ${comment.userId} 的資訊`);
               }
             }
-  
+
             return {
               ...comment,
               type: "recipe",
@@ -143,13 +143,13 @@ function IndexPage() {
           }
         })
       );
-  
+
       // 過濾掉 null 值並排序
       const validComments = commentsWithRecipeInfo
         .filter(comment => comment !== null)
         .sort((a, b) => b.date - a.date)
         .slice(0, 2);
-  
+
       setRecipeComments(validComments);
     } catch (error) {
       console.error("取得酒譜評論失敗", error);
@@ -1077,6 +1077,7 @@ function IndexPage() {
             </div>
           </div>
 
+
           {/* Slider main container  */}
           <div className="row" data-aos="fade-up" data-aos-duration="3000">
             <div className="col">
@@ -1101,6 +1102,7 @@ function IndexPage() {
             </div>
           </div>
         </div>
+
       </section >
       {/* <!-- 最新活動 --> */}
       < div className="container" >
@@ -1205,28 +1207,30 @@ function IndexPage() {
             {barComments.map((comment, index) => (
               <React.Fragment key={`bar-${comment.id}`}>
                 <li
-                  className="comments-list-item"
+                  className="comments-list-item d-flex justify-content-between flex-column"
                   data-aos={index === 0 ? "zoom-in-right" : "zoom-in-left"}
                 >
-                  <div className="comments-list-item-title d-flex mb-8">
-                    <img src={comment.userAvatar}  alt="" />
-                    <div className="comments-list-item-name ms-5">
-                      <h3 className="eng-font fs-7 fs-md-5 text-primary-3 mb-2">
-                        {comment.userName}
-                      </h3>
-                      <div className="d-flex align-items-center mt-auto">
-                        <span className="material-symbols-outlined comments-icon">
-                          location_on
-                        </span>
-                        <p className="eng-font fs-8 fs-lg-7 ms-2">
-                          {comment.barName}
-                        </p>
+                  <div>
+                    <div className="comments-list-item-title d-flex mb-8">
+                      <img src={comment.userAvatar} alt="" />
+                      <div className="comments-list-item-name ms-5">
+                        <h3 className="eng-font fs-7 fs-lg-6 text-primary-3 mb-2">
+                          {comment.userName}
+                        </h3>
+                        <div className="d-flex align-items-center mt-auto">
+                          <span className="material-symbols-outlined comments-icon">
+                            location_on
+                          </span>
+                          <p className="eng-font fs-8 fs-lg-7 ms-2">
+                            {comment.barName}
+                          </p>
+                        </div>
                       </div>
                     </div>
+                    <p className="comments-list-item-text fs-9 fs-lg-8">
+                      {comment.content}
+                    </p>
                   </div>
-                  <p className="comments-list-item-text fs-9 fs-lg-7 mb-lg-8 mb-6">
-                    {comment.content}
-                  </p>
                   <Link
                     to={`/bar/${comment.barId}`}
                     className="comments-list-item-btn d-flex justify-content-between"
@@ -1244,28 +1248,30 @@ function IndexPage() {
             {recipeComments.map((comment, index) => (
               <React.Fragment key={`recipe-${comment.id}`}>
                 <li
-                  className="comments-list-item"
+                  className="comments-list-item d-flex justify-content-between flex-column"
                   data-aos={index === 0 ? "zoom-in-right" : "zoom-in-left"}
                 >
-                  <div className="comments-list-item-title d-flex mb-8">
-                    <img src={comment.userAvatar}  alt="" />
-                    <div className="comments-list-item-name ms-5">
-                      <h3 className="eng-font fs-7 fs-md-5 text-primary-3 mb-2">
-                        {comment.userName}
-                      </h3>
-                      <div className="d-flex align-items-center mt-auto">
-                        <span className="material-symbols-outlined comments-icon">
-                          local_bar
-                        </span>
-                        <p className="eng-font fs-8 fs-lg-7 ms-2">
-                          {comment.recipeName}
-                        </p>
+                  <div>
+                    <div className="comments-list-item-title d-flex mb-8">
+                      <img src={comment.userAvatar} alt="" />
+                      <div className="comments-list-item-name ms-5">
+                        <h3 className="eng-font fs-7 fs-lg-6 text-primary-3 mb-2">
+                          {comment.userName}
+                        </h3>
+                        <div className="d-flex align-items-center mt-auto">
+                          <span className="material-symbols-outlined comments-icon">
+                            local_bar
+                          </span>
+                          <p className="eng-font fs-8 fs-lg-7 ms-2">
+                            {comment.recipeName}
+                          </p>
+                        </div>
                       </div>
                     </div>
+                    <p className="comments-list-item-text fs-9 fs-lg-8 ">
+                      {comment.content}
+                    </p>
                   </div>
-                  <p className="comments-list-item-text fs-9 fs-lg-7 mb-lg-8 mb-6">
-                    {comment.content}
-                  </p>
                   <Link
                     to={`/recipe/${comment.recipeId}`}
                     className="comments-list-item-btn d-flex justify-content-between"

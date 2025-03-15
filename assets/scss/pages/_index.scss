@@ -3,7 +3,7 @@
 // *,
 // *::after,
 // *::before {
-//   outline: 1px solid white;
+//   outline: 1px solid gray;
 // }
 
 .banner {
@@ -328,6 +328,12 @@
   background-size: cover;
   background-position: center;
 
+  .content {
+    margin: 0 auto;
+    max-width: 744px;
+
+  }
+
   .join-text {
     padding-top: 156px;
     padding-bottom: 156px;
@@ -488,6 +494,16 @@ $x-large: 1200px;
   //     }
   //   }
   // }
+
+  .container-fluid {
+    margin: 0 auto;
+    max-width: 1000px;
+
+    @include respond-to($large) {
+      max-width: 744px;
+    }
+
+  }
 
   .decoration {
     .wrap {
@@ -667,6 +683,11 @@ $x-large: 1200px;
 .section-popular-bars {
   color: $primary-1;
 
+  .container {
+    margin: 0 auto;
+    max-width: 744px;
+  }
+
   .main-title {
     h2 {
       @include respond-to($large) {
@@ -675,53 +696,48 @@ $x-large: 1200px;
     }
   }
 
-  .content {
-    padding: 96px 64px;
 
-    @include respond-to($large) {
-      padding: 32px 24px;
+
+  .txt-content {
+    .introduce {
+      width: 50%;
+
+      @include respond-to($large) {
+        width: 100%;
+      }
     }
 
-    .txt-content {
-      .introduce {
-        width: 50%;
+    .btn-md {
+      height: 62px;
+      display: flex;
+      justify-content: center;
+      align-self: flex-end;
+      max-width: 180px;
+      border-width: 2px;
+      border-style: solid;
+      border-image: linear-gradient(to right, #ffc93d, #b5650e) 1;
 
-        @include respond-to($large) {
-          width: 100%;
-        }
+      @media (max-width: 992px) {
+        // width: 99px;
+        height: 34px;
       }
 
-      .btn-md {
-        height: 62px;
-        display: flex;
-        justify-content: center;
-        align-self: flex-end;
-        max-width: 180px;
-        border-width: 2px;
-        border-style: solid;
-        border-image: linear-gradient(to right, #ffc93d, #b5650e) 1;
+      .btn-search {
+        font-size: 20px;
+        padding: 16px 20px;
 
         @media (max-width: 992px) {
-          width: 114px;
-          height: 34px;
-        }
-
-        .btn-search {
-          font-size: 20px;
-          padding: 16px 20px;
-
-          @media (max-width: 992px) {
-            font-size: 12px;
-            padding: 8px 12px;
-          }
-        }
-
-        a {
-          width: 248px;
-          align-items: center;
+          font-size: 12px;
+          padding: 8px 12px;
         }
       }
+
+      // a {
+      //   width: 248px;
+      //   align-items: center;
+      // }
     }
+
   }
 
   .swiper {
@@ -742,6 +758,10 @@ $x-large: 1200px;
         @include respond-to($large) {
           height: 70vh;
           // min-height: 530px;
+        }
+
+        .content {
+          padding: 32px 24px;
         }
       }
     }
@@ -826,6 +846,8 @@ $x-large: 1200px;
 .event {
   padding-top: 48px;
   padding-bottom: 164px;
+  margin: 0 auto;
+  max-width: 744px;
 
   @media (max-width: 992px) {
     padding-top: 32px;
@@ -850,12 +872,10 @@ $x-large: 1200px;
 
   &-bg {
     width: 476px;
-    background-image: linear-gradient(
-        180.02deg,
+    background-image: linear-gradient(180.02deg,
         rgba(0, 0, 0, 0.8) 0.01%,
         rgba(0, 0, 0, 0) 50.5%,
-        rgba(0, 0, 0, 0.8) 99.99%
-      ),
+        rgba(0, 0, 0, 0.8) 99.99%),
       url(../images/index-event-bg.png);
     background-size: cover;
     background-size: 450% auto;
@@ -924,7 +944,7 @@ $x-large: 1200px;
     }
 
     &-card-date {
-      width: 142px;
+      max-width: 150px;
       padding: 12px 24px;
       margin-bottom: 16px;
 
@@ -952,16 +972,18 @@ $x-large: 1200px;
 //留言
 
 .comments {
-  padding: 48px 0px;
+  padding-top: 48px;
+  max-width: 744px;
+  margin: 0 auto;
 
-  @media (max-width: 768px) {
+  @media (max-width: 992px) {
     padding: 40px 0px;
   }
 
   &-title {
     margin-bottom: 80px;
 
-    @media (max-width: 768px) {
+    @media (max-width: 992px) {
       margin-bottom: 24px;
     }
   }
@@ -996,6 +1018,7 @@ $x-large: 1200px;
       }
 
       &-title img {
+        border-radius: 50%;
         width: 80px;
         height: 80px;
 
@@ -1057,11 +1080,9 @@ $x-large: 1200px;
   transition: 0.5s;
   color: $primary-1;
   border: 1px solid;
-  border-image-source: linear-gradient(
-    100.25deg,
-    #ffc93d 4.04%,
-    #b5650e 97.53%
-  );
+  border-image-source: linear-gradient(100.25deg,
+      #ffc93d 4.04%,
+      #b5650e 97.53%);
   border-image-slice: 1; //圖像切片設置
   justify-content: center;
   align-items: center;
@@ -1182,8 +1203,10 @@ $x-large: 1200px;
     width: 48px;
     height: 48px;
   }
+
   .custom-padding {
     margin-right: -12px;
+
     @include respond-to($large) {
       margin-right: 0;
     }
