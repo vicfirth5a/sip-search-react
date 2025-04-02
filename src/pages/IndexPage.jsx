@@ -1,6 +1,5 @@
 import React, { useEffect, useRef, useState } from "react";
 import Swiper from "swiper/bundle";
-import axios from "axios";
 import "swiper/css/bundle";
 import Swal from "sweetalert2";
 
@@ -13,7 +12,6 @@ import { useUser } from "../contexts/UserContext";
 
 
 function IndexPage() {
-  const [events, setEvents] = useState([]);
   const [latestEvents, setLatestEvents] = useState([]);
   const { dataAxios } = useUser();
 
@@ -23,7 +21,6 @@ function IndexPage() {
     try {
       const res = await dataAxios.get('/events'); // 使用 dataAxios
       console.log("取得活動成功", res.data);
-      setEvents(res.data);
       filterLatestEvents(res.data);
     } catch (error) {
       console.error("取得活動失敗", error);
