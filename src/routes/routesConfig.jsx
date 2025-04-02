@@ -10,6 +10,7 @@ import NotFound from "../pages/NotFound";
 import WineContent from "../pages/WineContent";
 import BarContent from "../pages/BarContent";
 import BarSearch from "../pages/BarSearch";
+import AdminPage from "../pages/AdminPage";
 // 導入其他頁面...
 
 const routesConfig = [
@@ -53,6 +54,10 @@ const routesConfig = [
         path: "barsearch",
         element: <BarSearch />,
       },
+      {
+        path: "admin",
+        element: <AdminPage />,
+      }
 
       // 添加其他路由...
     ],

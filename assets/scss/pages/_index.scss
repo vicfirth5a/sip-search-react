@@ -876,11 +876,11 @@ $x-large: 1200px;
         rgba(0, 0, 0, 0.8) 0.01%,
         rgba(0, 0, 0, 0) 50.5%,
         rgba(0, 0, 0, 0.8) 99.99%),
-      url(../images/index-event-bg.png);
+      url(https://images.unsplash.com/photo-1699730185428-d11054059c7f?q=80&w=2231&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D);
     background-size: cover;
-    background-size: 450% auto;
-    background-position: right -650px top -50px;
-    // background-repeat: no-repeat;
+    // background-size: 450% auto;
+    // background-position: right -650px top -50px;
+    background-repeat: no-repeat;
     // height: 1181px;
 
     @media (max-width: 992px) {

@@ -914,7 +914,7 @@ function IndexPage() {
             </div>
             <div
               className="discover-cocktail"
-              data-aos="zoom-out-up"
+              data-aos="fade-up"
               data-aos-duration="1500"
             >
               <div className="discover-container d-flex">
@@ -949,7 +949,7 @@ function IndexPage() {
             </div>
             <div
               className="discover-bar"
-              data-aos="zoom-out-up"
+              data-aos="fade-up"
               data-aos-duration="1500"
             >
               <div className="discover-container d-flex">
