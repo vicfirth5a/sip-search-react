@@ -11,6 +11,7 @@ import WineContent from "../pages/WineContent";
 import BarContent from "../pages/BarContent";
 import BarSearch from "../pages/BarSearch";
 import AdminPage from "../pages/AdminPage";
+import Activity from "../pages/Activity";
 // 導入其他頁面...
 
 const routesConfig = [
@@ -57,8 +58,12 @@ const routesConfig = [
       {
         path: "admin",
         element: <AdminPage />,
-      }
+      },
+      {
 
+        path: "activity",
+        element: <Activity />,
+      },
       // 添加其他路由...
     ],
   },
