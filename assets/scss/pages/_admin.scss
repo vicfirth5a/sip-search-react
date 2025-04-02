@@ -1,8 +1,8 @@
-*,
-*::after,
-*::before {
-    outline: 1px solid gray;
-}
+// *,
+// *::after,
+// *::before {
+//     outline: 1px solid gray;
+// }
 
 .admin-bg {
     padding-top: 104px;
@@ -203,6 +203,27 @@
 
                 color: white;
                 font-weight: lighter;
+            }
+        }
+
+        .recipe-steps {
+
+            & th,
+            td {
+                color: $neutral-1;
+            }
+        }
+
+        .add-tags {
+
+            // &-btn {
+            //     width: 28px;
+            //     height: 28px;
+
+            // }
+
+            .form-control {
+                width: 300px;
             }
         }
 
