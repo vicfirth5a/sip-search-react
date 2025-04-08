@@ -10,6 +10,9 @@ import NotFound from "../pages/NotFound";
 import WineContent from "../pages/WineContent";
 import BarContent from "../pages/BarContent";
 import BarSearch from "../pages/BarSearch";
+import MemberArea from "../pages/MemberArea";
+
+import Activity from "../pages/Activity";
 // 導入其他頁面...
 
 const routesConfig = [
@@ -53,7 +56,14 @@ const routesConfig = [
         path: "barsearch",
         element: <BarSearch />,
       },
-
+      {
+        path: "users/:id",
+        element: <MemberArea />,
+      },
+      {
+        path: "activity",
+        element: <Activity />,
+      },
       // 添加其他路由...
     ],
   },

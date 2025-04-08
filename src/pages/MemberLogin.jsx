@@ -1,51 +1,72 @@
-import React, { useEffect,  useState } from "react";
-import { Link, useNavigate } from "react-router";
+import React, { useEffect, useState } from "react";
+import { Link, useNavigate } from "react-router-dom";
 import axios from "axios";
+import { useUser } from "../contexts/UserContext";
 
-const baseUrl = import.meta.env.VITE_API_URL;
-
+// const baseUrl = import.meta.env.VITE_API_URL;
 
 function MemberLogin() {
-
-const [account, setAccount] = useState({
+  const { user, authAxios } = useUser(); // 添加 useUser hook
+  const [account, setAccount] = useState({
     email: "",
-    password:"",
-});
-
-const navigate = useNavigate();
-
-const handleInputChange = (e) => {
-  const { value, name } = e.target;
-
-  setAccount({
-    ...account,
-    [name]: value,
+    password: "",
   });
-};
+  const [errors, setErrors] = useState({
+    email: '',
+    password: ''
+  });
 
-const handleLogin = async (e) => {
-  e.preventDefault();
-  try {
-    const res = await axios.post(`${baseUrl}/login`, account);
-    console.log(res.data);
-    // 將使用者資訊存到 localStorage
-    localStorage.setItem('user', JSON.stringify(res.data.user));
-    // 重新導向到首頁
-    navigate('/');
-  } catch (error) {
-    alert("登入失敗");
-    console.error(error);
-    
-  }
-}
+  const navigate = useNavigate();
+  const { login } = useUser(); // 從 context 中取得 login 函數
 
-useEffect(() => {
-  const token = document.cookie.replace(
-    /(?:(?:^|.*;\s*)hexToken\s*\=\s*([^;]*).*$)|^.*$/,
-    "$1"
-  );
-  axios.defaults.headers.common["Authorization"] = token;
-}, []);
+  const handleInputChange = (e) => {
+    const { value, name } = e.target;
+    setAccount({
+      ...account,
+      [name]: value,
+    });
+
+    //密碼驗證
+    if (name === "password") {
+      if (value.length === 0) {
+        setErrors((prev) => ({ ...prev, password: "請輸入密碼" }));
+      } else if (value.length < 6) {
+        setErrors((prev) => ({
+          ...prev,
+          password: "密碼長度至少需要 6 個字元",
+        }));
+      } else if (!/^[A-Za-z0-9]*$/.test(value)) {
+        setErrors((prev) => ({
+          ...prev,
+          password: "密碼只能包含英文字母和數字",
+        }));
+      } else {
+        setErrors((prev) => ({ ...prev, password: "" }));
+      }
+    }
+  };
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    try {
+      const res = await authAxios.post(`/login`, account);
+      // json-server-auth 回傳的是 { accessToken, user } 格式
+      if (res.data.accessToken) {
+        // 將 token 和用戶資訊一起傳給 context
+        const userData = {
+          ...res.data.user,
+          token: res.data.accessToken,
+        };
+        login(userData);
+        navigate("/");
+      } else {
+        alert("登入失敗");
+      }
+    } catch (error) {
+      alert(error.response?.data?.message || "登入失敗");
+      console.error(error);
+    }
+  };
 
   return (
     <>
@@ -62,7 +83,10 @@ useEffect(() => {
                   已有帳號，使用註冊信箱登入
                 </h6>
 
-                <form onSubmit={handleLogin} className="text-primary-1 mb-lg-12">
+                <form
+                  onSubmit={handleLogin}
+                  className="text-primary-1 mb-lg-12"
+                >
                   <div className="mb-3">
                     <label
                       htmlFor="exampleInputEmail1"
@@ -90,13 +114,23 @@ useEffect(() => {
                     </label>
                     <input
                       type="password"
-                      className="form-control text-primary-1 mb-10"
+                      className={`form-control text-primary-1 mb-10 ${
+                        account.password &&
+                        (errors.password ? "is-invalid" : "is-valid")
+                      }`}
                       id="exampleInputPassword1"
                       name="password"
                       value={account.password}
                       onChange={handleInputChange}
                       required
                     />
+                    {errors.password ? (
+                      <div className="invalid-feedback">{errors.password}</div>
+                    ) : (
+                      account.password && (
+                        <div className="valid-feedback">密碼格式正確</div>
+                      )
+                    )}
                   </div>
 
                   <button
