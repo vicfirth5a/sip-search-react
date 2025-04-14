@@ -1,11 +1,41 @@
-import { React } from "react";
+import { React, useEffect, useState } from "react";
 
 export default function Activity() {
+  const [activities, setActivities] = useState([]);
+  const [bars, setBars] = useState([]);
+
+  useEffect(function () {
+    async function getActivities() {
+      try {
+        const res = await fetch(`https://sip-search.onrender.com/events`);
+        const data = await res.json();
+        setActivities(data);
+        console.log(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getActivities();
+  }, []);
+
+  useEffect(function () {
+    async function getBars() {
+      try {
+        const res = await fetch(`https://sip-search.onrender.com/bars`);
+        const data = await res.json();
+        setBars(data);
+      } catch (error) {
+        console.log(error);
+      }
+    }
+    getBars();
+  }, []);
+
   return (
     <div className="activity">
       <Title />
       <Filter />
-      <Results />
+      <Results activities={activities} bars={bars} />
       <PopularEvents />
     </div>
   );
@@ -52,41 +82,86 @@ function FilterItem({ title, content }) {
   );
 }
 
-function Results() {
+function Results({ activities, bars }) {
+  const [currentPage, setCurrentPage] = useState(1);
+  const itemsPerPage = 9;
+
+  // 計算目前頁面應該顯示的資料
+  const indexOfLastItem = currentPage * itemsPerPage;
+  const indexOfFirstItem = indexOfLastItem - itemsPerPage;
+  const currentItems = activities?.slice(indexOfFirstItem, indexOfLastItem);
+
+  // 計算總頁數
+  const totalPages = Math.ceil((activities?.length || 0) / itemsPerPage);
+
+  // 處理頁面切換
+  const handlePageChange = (pageNumber) => {
+    setCurrentPage(pageNumber);
+  };
+
   return (
     <div className="container">
       <section className="section-results">
         <div className="txt text-primary-1 d-flex align-items-center">
           <h3 className="fs-md-5 text-primary-1">篩選結果</h3>
-          <span className="ms-6">共19筆</span>
+          <span className="ms-6">共{activities.length}筆</span>
         </div>
 
         <div className="resultsItems">
+          {currentItems?.map((activity) => (
+            <ResultsItem activity={activity} bars={bars} key={activity.id} />
+          ))}
+
+          {/* {activities?.map((activity) => (
+            <ResultsItem activity={activity} bars={bars} key={activity.id} />
+          ))} */}
+          {/* <ResultsItem />
           <ResultsItem />
-          <ResultsItem />
-          <ResultsItem />
+          <ResultsItem /> */}
         </div>
 
         <div className="pages">
-          <span className="active ">1</span>
+          {Array.from({ length: totalPages }, (_, index) => (
+            <span
+              key={index + 1}
+              className={currentPage === index + 1 ? "active" : ""}
+              onClick={() => handlePageChange(index + 1)}
+              style={{ cursor: "pointer" }}
+            >
+              {index + 1}
+            </span>
+          ))}
+
+          {/* <span className="active ">1</span>
           <span>2</span>
           <span>3</span>
-          <span>></span>
+          <span>></span> */}
         </div>
       </section>
     </div>
   );
 }
-function ResultsItem() {
+function ResultsItem({ activity, bars }) {
+  const barId = activity.id;
+  console.log(barId);
+  const [bar] = bars.filter((bar) => bar.id === activity.barId);
+  console.log(bar);
+  const itemStyle = {
+    backgroundImage: `linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)), url(${activity.imagesUrl[0]})`,
+    backgroundSize: "cover",
+    backgroundPosition: "center",
+  };
   return (
-    <div className="result-item">
+    <div className="result-item" style={itemStyle}>
       <div>
-        <h4 className="fs-md-7 mb-3">四月餐酒館</h4>
-        <span className="activity-date fs-md-9">2/1~2/14</span>
+        <h4 className="fs-md-7 mb-3">{bar.name}</h4>
+        <span className="activity-date fs-md-9">
+          {activity.startDate}~{activity.endDate}
+        </span>
       </div>
       <div className="tags d-flex  gap-4">
-        <span className="tag">台南市</span>
-        <span className="tag">情人節</span>
+        <span className="tag">{activity.area}</span>
+        <span className="tag">{activity.name}</span>
       </div>
     </div>
   );

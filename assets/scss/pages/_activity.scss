@@ -43,19 +43,22 @@
     color: $primary-1;
     .resultsItems {
       display: flex;
+      justify-content: center;
       flex-wrap: wrap;
       gap: 36px;
       margin: 48px 0;
       .result-item {
-        flex-grow: 1;
+        // flex-grow: 1;
+        width: 320px;
+        overflow: hidden;
         cursor: pointer;
         min-height: 372px;
         padding: 32px 24px;
 
-        background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
-          url("https://images.unsplash.com/photo-1618659525444-49206d11d0b6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
-        background-size: cover; /* 或其他適合的設定 */
-        background-position: center;
+        // background: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
+        //   url("https://images.unsplash.com/photo-1618659525444-49206d11d0b6?q=80&w=1974&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D");
+        // background-size: cover; /* 或其他適合的設定 */
+        // background-position: center;
         background-repeat: no-repeat;
         display: flex;
         flex-direction: column;
